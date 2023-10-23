@@ -10,7 +10,9 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
-builder.Services.AddDbContext<AppDbContext>(optionsBuilder => optionsBuilder.UseSqlServer("Server=localhost;Database=GarageAppDb;Trusted_Connection=True;TrustServerCertificate=True;"));
+//можеш так запускати, тільки треба заново зробити міграцію просто пишеш dotnet ef database update, може навіть без цього запуститься
+//якщо ні то напиши builder.Configuration.GetConnectionString("DBContextLocalHost")
+builder.Services.AddDbContext<AppDbContext>(optionsBuilder => optionsBuilder.UseSqlServer(builder.Configuration.GetConnectionString("DBContextLocalDB"))); 
 
 var app = builder.Build();
 
