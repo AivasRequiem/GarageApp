@@ -9,6 +9,7 @@ using GarageApp.Data;
 using GarageApp.Models;
 using Microsoft.AspNetCore.Authorization;
 using System.Data;
+using System.Security.Claims;
 
 namespace GarageApp.Controllers
 {
@@ -68,6 +69,7 @@ namespace GarageApp.Controllers
         [Authorize(Roles = "Admin,garageOwner")]
         public async Task<IActionResult> Create([Bind("Id,Name")] Garage garage)
         {
+            garage.OwnerId = new Guid(User.FindFirstValue(ClaimTypes.NameIdentifier));
             if (ModelState.IsValid)
             {
                 _context.Add(garage);
