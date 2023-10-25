@@ -54,8 +54,7 @@ namespace GarageApp.Controllers
         }
 
         // GET: Garages/Create
-        [Authorize(Roles = "Admin")]
-        [Authorize(Roles = "garageOwner")]
+        [Authorize(Roles = "Admin,garageOwner")]
         public IActionResult Create()
         {
             return View();
@@ -66,8 +65,7 @@ namespace GarageApp.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        [Authorize(Roles = "Admin")]
-        [Authorize(Roles = "garageOwner")]
+        [Authorize(Roles = "Admin,garageOwner")]
         public async Task<IActionResult> Create([Bind("Id,Name")] Garage garage)
         {
             if (ModelState.IsValid)
@@ -80,8 +78,7 @@ namespace GarageApp.Controllers
         }
 
         // GET: Garages/Edit/5
-        [Authorize(Roles = "Admin")]
-        [Authorize(Roles = "garageOwner")]
+        [Authorize(Roles = "Admin,garageOwner")]
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null || _context.Garages == null)
@@ -102,8 +99,7 @@ namespace GarageApp.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        [Authorize(Roles = "Admin")]
-        [Authorize(Roles = "garageOwner")]
+        [Authorize(Roles = "Admin,garageOwner")]
         public async Task<IActionResult> Edit(int id, [Bind("Id,Name")] Garage garage)
         {
             if (id != garage.Id)
@@ -135,8 +131,7 @@ namespace GarageApp.Controllers
         }
 
         // GET: Garages/Delete/5
-        [Authorize(Roles = "Admin")]
-        [Authorize(Roles = "garageOwner")]
+        [Authorize(Roles = "Admin,garageOwner")]
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null || _context.Garages == null)
@@ -157,8 +152,7 @@ namespace GarageApp.Controllers
         // POST: Garages/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        [Authorize(Roles = "Admin")]
-        [Authorize(Roles = "garageOwner")]
+        [Authorize(Roles = "Admin,garageOwner")]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
             if (_context.Garages == null)
