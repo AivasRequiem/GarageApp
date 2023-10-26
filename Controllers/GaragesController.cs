@@ -58,6 +58,7 @@ namespace GarageApp.Controllers
         [Authorize(Roles = "Admin,garageOwner")]
         public IActionResult Create()
         {
+            ViewBag.Specialization = _context.Specialization.ToList();
             return View();
         }
 
@@ -67,9 +68,23 @@ namespace GarageApp.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         [Authorize(Roles = "Admin,garageOwner")]
-        public async Task<IActionResult> Create([Bind("Id,Name")] Garage garage)
+        public async Task<IActionResult> Create(Garage garage, string[] GarageSpecializations)
         {
             garage.OwnerId = new Guid(User.FindFirstValue(ClaimTypes.NameIdentifier));
+            if (GarageSpecializations != null)
+            {
+                foreach (var specialization in GarageSpecializations)
+                {
+                    Guid specializationId;
+                    if (Guid.TryParse(specialization, out specializationId))
+                    {
+                        var spec = _context.Specialization.First(elem => elem.Id == specializationId);
+                        garage.GarageSpecializations.Add(new GarageSpecializations() { 
+                                Garage = garage, 
+                                Specialization = spec, SpecializationId = specializationId });
+                    }
+                }
+            }
             if (ModelState.IsValid)
             {
                 _context.Add(garage);
