@@ -10,4 +10,5 @@ public class Garage
     public string? Name { get; set; }
     [Required]
     public Guid OwnerId { get; set; }
+    public List<GarageSpecializations>? GarageSpecializations { get; set; }
 }
