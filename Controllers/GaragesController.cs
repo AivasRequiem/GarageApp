@@ -62,6 +62,27 @@ namespace GarageApp.Controllers
             return View();
         }
 
+        private void addSpecializationToGarage(Garage garage, string[] GarageSpecializations)
+        {
+            if (GarageSpecializations != null)
+            {
+                foreach (var specialization in GarageSpecializations)
+                {
+                    Guid specializationId;
+                    if (Guid.TryParse(specialization, out specializationId))
+                    {
+                        var spec = _context.Specialization.First(elem => elem.Id == specializationId);
+                        garage.GarageSpecializations.Add(new GarageSpecializations()
+                        {
+                            Garage = garage,
+                            Specialization = spec,
+                            SpecializationId = specializationId
+                        });
+                    }
+                }
+            }
+        }
+
         // POST: Garages/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
@@ -75,20 +96,9 @@ namespace GarageApp.Controllers
                 return BadRequest();
             }
             garage.OwnerId = new Guid(User.FindFirstValue(ClaimTypes.NameIdentifier));
-            if (GarageSpecializations != null)
-            {
-                foreach (var specialization in GarageSpecializations)
-                {
-                    Guid specializationId;
-                    if (Guid.TryParse(specialization, out specializationId))
-                    {
-                        var spec = _context.Specialization.First(elem => elem.Id == specializationId);
-                        garage.GarageSpecializations.Add(new GarageSpecializations() { 
-                                Garage = garage, 
-                                Specialization = spec, SpecializationId = specializationId });
-                    }
-                }
-            }
+
+            addSpecializationToGarage(garage, GarageSpecializations);
+
             if (ModelState.IsValid)
             {
                 _context.Add(garage);
@@ -154,21 +164,8 @@ namespace GarageApp.Controllers
                     {
                         existingGarage.GarageSpecializations = new List<GarageSpecializations>();
                     }
-                    // move to funk same in creation            
-                    foreach (var specialization in GarageSpecializations)
-                    {
-                        Guid specializationId;
-                        if (Guid.TryParse(specialization, out specializationId))
-                        {
-                            var spec = _context.Specialization.First(elem => elem.Id == specializationId);
-                            existingGarage.GarageSpecializations.Add(new GarageSpecializations()
-                            {
-                                Garage = existingGarage,
-                                Specialization = spec,
-                                SpecializationId = specializationId
-                            });
-                        }
-                    }
+                    
+                    addSpecializationToGarage(existingGarage, GarageSpecializations);
                 }
                 try
                 {
