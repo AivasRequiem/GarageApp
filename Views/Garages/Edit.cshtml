@@ -19,6 +19,18 @@
                 <span asp-validation-for="Name" class="text-danger"></span>
             </div>
             <div class="form-group">
+                <label asp-for="GarageSpecializations" class="control-label">Garage Specializations</label>
+                <input type="hidden" asp-for="GarageSpecializations" />
+                @foreach (var specialization in ViewBag.Specialization)
+                {
+                    <div>
+                        <input type="checkbox" name="GarageSpecializations" value="@specialization.Id"
+                               checked="@(Model.GarageSpecializations.Any(item => item.SpecializationId == specialization.Id))" />
+                        @specialization.Name
+                    </div>
+                }
+            </div>
+            <div class="form-group">
                 <input type="submit" value="Save" class="btn btn-primary" />
             </div>
         </form>

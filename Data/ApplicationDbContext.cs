@@ -31,7 +31,7 @@ namespace GarageApp.Data
 
         }
 
-        public DbSet<GarageApp.Models.Specialization> Specialization { get; set; } = default!;
+        public DbSet<Specialization> Specialization { get; set; } = default!;
 
     }
 }
