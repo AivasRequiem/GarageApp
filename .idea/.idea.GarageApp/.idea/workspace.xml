@@ -11,11 +11,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="7ce780e2-8a72-467f-a3e5-3a72ec20e582" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/Startup.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Data/Migrations/ApplicationDbContextModelSnapshot.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Data/Migrations/ApplicationDbContextModelSnapshot.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/GarageApp.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/GarageApp.csproj" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/GarageApp.sln" beforeDir="false" afterPath="$PROJECT_DIR$/GarageApp.sln" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Program.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Program.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.GarageApp/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.GarageApp/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GarageAppUnitTests/GarageTests.cs" beforeDir="false" afterPath="$PROJECT_DIR$/GarageAppUnitTests/GarageTests.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -44,6 +41,8 @@
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/235b8d206b56acfe04faeb04511585b156981556882336a9a49a871c0722e90/Type.CoreCLR.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/2db9d6c9bbd2ac719a28dff1b623e6555e3c691db1116019cd7930ea711633/IdentityBuilderExtensions.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/36e740b59df23626d207e72ea77e34298e53dd99db463eee529f8c416b5664/ThrowHelper.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/3a6291d8ecb856283962be1c27ec2b577a3c4b1ef5ef69b3435146c1c07a890/SignInManager.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/a6c1c725bda61664ef57f24a5c8957b67d87d6ecf9e978bdd4de9fffb57f6/HttpClient.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/b42231cbbca1b9c96971b21e824e3ee1628b9c688ad29be15ac5a2feb41319e/StateManager.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/ba2a6183ffbe1e67e6436a2648e120c5486d6456d8d4bc51d1d133fdb1cbcc1c/It.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/bd1d5c50194fea68ff3559c160230b0ab50f5acf4ce3061bffd6d62958e2182/ExceptionDispatchInfo.cs" root0="SKIP_HIGHLIGHTING" />
@@ -68,7 +67,7 @@
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "WebServerToolWindowFactoryState": "false",
-    "git-widget-placeholder": "Add__servise__specialization",
+    "git-widget-placeholder": "UnitTests",
     "ignore.virus.scanning.warn.message": "true",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
@@ -167,7 +166,7 @@
       <workItem from="1698183903440" duration="1030000" />
       <workItem from="1698265380715" duration="5728000" />
       <workItem from="1698424818193" duration="37000" />
-      <workItem from="1698424892989" duration="12407000" />
+      <workItem from="1698424892989" duration="16231000" />
     </task>
     <task id="LOCAL-00001" summary="Initial Commit">
       <option name="closed" value="true" />
