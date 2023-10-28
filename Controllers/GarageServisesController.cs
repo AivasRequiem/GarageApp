@@ -45,27 +45,29 @@ namespace GarageApp.Controllers
             return View(garageServise);
         }
 
-        // GET: GarageServises/Create
-        public IActionResult Create()
+        // GET: GarageServises/Create/garageId
+        public IActionResult Create(int garageId)
         {
-            ViewData["GarageId"] = new SelectList(_context.Garages, "Id", "Id");
+            ViewData["GarageId"] = garageId;
             return View();
         }
 
-        // POST: GarageServises/Create
+        // POST: GarageServises/Create/garageId
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Name,Descripion,Price,GarageId")] GarageServise garageServise)
+        public async Task<IActionResult> Create(int id, [Bind("Name,Descripion,Price,GarageId")] GarageServise garageServise)
         {
-            if (ModelState.IsValid)
-            {
+            garageServise.GarageId = id;
+            garageServise.Garage = _context.Garages.First(elem => elem.Id == id);
+            //if (ModelState.IsValid)
+            //{
                 garageServise.Id = Guid.NewGuid();
                 _context.Add(garageServise);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
-            }
+            //}
             ViewData["GarageId"] = new SelectList(_context.Garages, "Id", "Id", garageServise.GarageId);
             return View(garageServise);
         }

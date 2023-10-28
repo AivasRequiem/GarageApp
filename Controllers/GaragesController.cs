@@ -25,7 +25,8 @@ namespace GarageApp.Controllers
         // GET: Garages
         public async Task<IActionResult> Index()
         {
-              return _context.Garages != null ? 
+ 
+            return _context.Garages != null ? 
                           View(await _context.Garages.ToListAsync()) :
                           Problem("Entity set 'ApplicationDbContext.Garages'  is null.");
         }
@@ -50,6 +51,8 @@ namespace GarageApp.Controllers
             {
                 return NotFound();
             }
+
+            ViewBag.GarageServises = await _context.GarageServise.Where(elem => elem.GarageId == id).ToListAsync();
 
             return View(garage);
         }
