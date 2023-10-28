@@ -17,7 +17,7 @@ namespace GarageApp.Data.Migrations
             migrationBuilder.Sql($"INSERT INTO AspNetRoles (Id, Name, NormalizedName) VALUES ('{garageOwnerRoleId}', 'garageOwner', 'GARAGEOWNER')");
             migrationBuilder.Sql($"INSERT INTO AspNetRoles (Id, Name, NormalizedName) VALUES ('{adminRoleId}', 'Admin', 'ADMIN')");
 
-            Guid userId = Guid.NewGuid();
+            Guid userId = new Guid();
             migrationBuilder.Sql($"INSERT INTO AspNetUsers (Id, UserName, " +
                 $"NormalizedUserName, Email, NormalizedEmail, PasswordHash, " +
                 $"SecurityStamp, ConcurrencyStamp, EmailConfirmed, PhoneNumberConfirmed, TwoFactorEnabled, " +
