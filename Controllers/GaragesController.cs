@@ -91,6 +91,10 @@ namespace GarageApp.Controllers
         [Authorize(Roles = "Admin,garageOwner")]
         public async Task<IActionResult> Create(Garage garage, string[] GarageSpecializations)
         {
+            if (_context.Garages.Any(g => g.Name == garage.Name))
+            {
+                return BadRequest();
+            }
             garage.OwnerId = new Guid(User.FindFirstValue(ClaimTypes.NameIdentifier));
 
             addSpecializationToGarage(garage, GarageSpecializations);
