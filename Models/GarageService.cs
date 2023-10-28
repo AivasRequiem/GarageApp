@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace GarageApp.Models
 {
-    public class GarageServise
+    public class GarageService
     {
         [Key]
         public Guid Id { get; set; }

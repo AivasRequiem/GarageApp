@@ -9,14 +9,15 @@ using GarageApp.Data;
 using GarageApp.Models;
 using System.ComponentModel.DataAnnotations;
 using Microsoft.IdentityModel.Tokens;
+using static GarageApp.Controllers.GarageServicesController;
 
 namespace GarageApp.Controllers
 {
-    public class GarageServisesController : Controller
+    public class GarageServicesController : Controller
     {
         private readonly ApplicationDbContext _context;
 
-        public GarageServisesController(ApplicationDbContext context)
+        public GarageServicesController(ApplicationDbContext context)
         {
             _context = context;
         }
@@ -24,27 +25,27 @@ namespace GarageApp.Controllers
         // GET: GarageServises
         public async Task<IActionResult> Index()
         {
-            var applicationDbContext = _context.GarageServise.Include(g => g.Garage);
+            var applicationDbContext = _context.GarageService.Include(g => g.Garage);
             return View(await applicationDbContext.ToListAsync());
         }
 
         // GET: GarageServises/Details/5
         public async Task<IActionResult> Details(Guid? id)
         {
-            if (id == null || _context.GarageServise == null)
+            if (id == null || _context.GarageService == null)
             {
                 return NotFound();
             }
 
-            var garageServise = await _context.GarageServise
+            var garageService = await _context.GarageService
                 .Include(g => g.Garage)
                 .FirstOrDefaultAsync(m => m.Id == id);
-            if (garageServise == null)
+            if (garageService == null)
             {
                 return NotFound();
             }
 
-            return View(garageServise);
+            return View(garageService);
         }
 
         // GET: GarageServises/Create/id
@@ -68,7 +69,7 @@ namespace GarageApp.Controllers
             return View();
         }
 
-        public class GarageServiseFromForm
+        public class GarageServiceFromForm
         {
             [Required]
             public string Name { get; set; }
@@ -82,43 +83,43 @@ namespace GarageApp.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create(int id, [Bind("Name,Description,Price,SpecializationId")] GarageServiseFromForm garageServise)
+        public async Task<IActionResult> Create(int id, [Bind("Name,Description,Price,SpecializationId")] GarageServiceFromForm garageService)
         {            
             if (ModelState.IsValid)
             {
-                GarageServise newServise = new GarageServise()
+                GarageService newServise = new GarageService()
                 {
-                    Description = garageServise.Description,
-                    Name = garageServise.Name,
-                    Price = garageServise.Price,
+                    Description = garageService.Description,
+                    Name = garageService.Name,
+                    Price = garageService.Price,
                     Garage = await _context.Garages.FirstAsync(elem => elem.Id == id),
                     GarageId = id,
-                    SpecializationId = garageServise.SpecializationId,
-                    Specialization = await _context.Specialization.FirstAsync(elem => elem.Id == garageServise.SpecializationId),
+                    SpecializationId = garageService.SpecializationId,
+                    Specialization = await _context.Specialization.FirstAsync(elem => elem.Id == garageService.SpecializationId),
                 };
                 _context.Add(newServise);
                 await _context.SaveChangesAsync();
                 return RedirectToAction("Details", "Garages", new { id = id });
             }
 
-            return View(garageServise);
+            return View(garageService);
         }
 
         // GET: GarageServises/Edit/5
         public async Task<IActionResult> Edit(Guid? id)
         {
-            if (id == null || _context.GarageServise == null)
+            if (id == null || _context.GarageService == null)
             {
                 return NotFound();
             }
 
-            var garageServise = await _context.GarageServise.FindAsync(id);
-            if (garageServise == null)
+            var garageService = await _context.GarageService.FindAsync(id);
+            if (garageService == null)
             {
                 return NotFound();
             }
-            ViewData["GarageId"] = new SelectList(_context.Garages, "Id", "Id", garageServise.GarageId);
-            return View(garageServise);
+            ViewData["GarageId"] = new SelectList(_context.Garages, "Id", "Id", garageService.GarageId);
+            return View(garageService);
         }
 
         // POST: GarageServises/Edit/5
@@ -127,9 +128,9 @@ namespace GarageApp.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         //change here to GarageServiseForm
-        public async Task<IActionResult> Edit(Guid id, [Bind("Id,Name,Description,Price,GarageId")] GarageServise garageServise)
+        public async Task<IActionResult> Edit(Guid id, [Bind("Id,Name,Description,Price,GarageId")] GarageService garageService)
         {
-            if (id != garageServise.Id)
+            if (id != garageService.Id)
             {
                 return NotFound();
             }
@@ -138,12 +139,12 @@ namespace GarageApp.Controllers
             {
                 try
                 {
-                    _context.Update(garageServise);
+                    _context.Update(garageService);
                     await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!GarageServiseExists(garageServise.Id))
+                    if (!GarageServiseExists(garageService.Id))
                     {
                         return NotFound();
                     }
@@ -154,27 +155,27 @@ namespace GarageApp.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["GarageId"] = new SelectList(_context.Garages, "Id", "Id", garageServise.GarageId);
-            return View(garageServise);
+            ViewData["GarageId"] = new SelectList(_context.Garages, "Id", "Id", garageService.GarageId);
+            return View(garageService);
         }
 
         // GET: GarageServises/Delete/5
         public async Task<IActionResult> Delete(Guid? id)
         {
-            if (id == null || _context.GarageServise == null)
+            if (id == null || _context.GarageService == null)
             {
                 return NotFound();
             }
 
-            var garageServise = await _context.GarageServise
+            var garageService = await _context.GarageService
                 .Include(g => g.Garage)
                 .FirstOrDefaultAsync(m => m.Id == id);
-            if (garageServise == null)
+            if (garageService == null)
             {
                 return NotFound();
             }
 
-            return View(garageServise);
+            return View(garageService);
         }
 
         // POST: GarageServises/Delete/5
@@ -182,14 +183,14 @@ namespace GarageApp.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(Guid id)
         {
-            if (_context.GarageServise == null)
+            if (_context.GarageService == null)
             {
-                return Problem("Entity set 'ApplicationDbContext.GarageServise'  is null.");
+                return Problem("Entity set 'ApplicationDbContext.GarageService'  is null.");
             }
-            var garageServise = await _context.GarageServise.FindAsync(id);
-            if (garageServise != null)
+            var garageService = await _context.GarageService.FindAsync(id);
+            if (garageService != null)
             {
-                _context.GarageServise.Remove(garageServise);
+                _context.GarageService.Remove(garageService);
             }
             
             await _context.SaveChangesAsync();
@@ -198,7 +199,7 @@ namespace GarageApp.Controllers
 
         private bool GarageServiseExists(Guid id)
         {
-          return (_context.GarageServise?.Any(e => e.Id == id)).GetValueOrDefault();
+          return (_context.GarageService?.Any(e => e.Id == id)).GetValueOrDefault();
         }
     }
 }

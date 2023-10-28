@@ -13,19 +13,19 @@ namespace GarageApp.Data.Migrations
         {
             migrationBuilder.AddColumn<Guid>(
                 name: "SpecializationId",
-                table: "GarageServise",
+                table: "GarageService",
                 type: "uniqueidentifier",
                 nullable: false,
                 defaultValue: new Guid("00000000-0000-0000-0000-000000000000"));
 
             migrationBuilder.CreateIndex(
                 name: "IX_GarageServise_SpecializationId",
-                table: "GarageServise",
+                table: "GarageService",
                 column: "SpecializationId");
 
             migrationBuilder.AddForeignKey(
                 name: "FK_GarageServise_Specialization_SpecializationId",
-                table: "GarageServise",
+                table: "GarageService",
                 column: "SpecializationId",
                 principalTable: "Specialization",
                 principalColumn: "Id",
@@ -37,15 +37,15 @@ namespace GarageApp.Data.Migrations
         {
             migrationBuilder.DropForeignKey(
                 name: "FK_GarageServise_Specialization_SpecializationId",
-                table: "GarageServise");
+                table: "GarageService");
 
             migrationBuilder.DropIndex(
                 name: "IX_GarageServise_SpecializationId",
-                table: "GarageServise");
+                table: "GarageService");
 
             migrationBuilder.DropColumn(
                 name: "SpecializationId",
-                table: "GarageServise");
+                table: "GarageService");
         }
     }
 }

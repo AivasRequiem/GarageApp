@@ -25,7 +25,7 @@ namespace GarageApp.Data.Migrations
                 nullable: true);
 
             migrationBuilder.CreateTable(
-                name: "GarageServise",
+                name: "GarageService",
                 columns: table => new
                 {
                     Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
@@ -36,9 +36,9 @@ namespace GarageApp.Data.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_GarageServise", x => x.Id);
+                    table.PrimaryKey("PK_GarageService", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_GarageServise_Garages_GarageId",
+                        name: "FK_GarageService_Garages_GarageId",
                         column: x => x.GarageId,
                         principalTable: "Garages",
                         principalColumn: "Id",
@@ -46,8 +46,8 @@ namespace GarageApp.Data.Migrations
                 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_GarageServise_GarageId",
-                table: "GarageServise",
+                name: "IX_GarageService_GarageId",
+                table: "GarageService",
                 column: "GarageId");
         }
 
@@ -55,7 +55,7 @@ namespace GarageApp.Data.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "GarageServise");
+                name: "GarageService");
 
             migrationBuilder.DropColumn(
                 name: "AwailablePlaces",
