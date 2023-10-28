@@ -11,11 +11,6 @@ namespace GarageApp.Data.Migrations
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.RenameColumn(
-                name: "Descripion",
-                table: "GarageServise",
-                newName: "Description");
-
             migrationBuilder.AddColumn<Guid>(
                 name: "SpecializationId",
                 table: "GarageServise",
@@ -51,11 +46,6 @@ namespace GarageApp.Data.Migrations
             migrationBuilder.DropColumn(
                 name: "SpecializationId",
                 table: "GarageServise");
-
-            migrationBuilder.RenameColumn(
-                name: "Description",
-                table: "GarageServise",
-                newName: "Descripion");
         }
     }
 }
