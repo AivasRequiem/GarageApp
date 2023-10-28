@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using GarageApp.Data;
 using GarageApp.Models;
+using System.ComponentModel.DataAnnotations;
 
 namespace GarageApp.Controllers
 {
@@ -52,23 +53,37 @@ namespace GarageApp.Controllers
             return View();
         }
 
-        // POST: GarageServises/Create/garageId
+        public class GarageServiseFromForm
+        {
+            [Required]
+            public string Name { get; set; }
+            public string? Description { get; set; } //change to Description
+            public decimal? Price { get; set; }
+            //add specialization
+        }
+
+        // POST: GarageServises/Create/id
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create(int id, [Bind("Name,Descripion,Price,GarageId")] GarageServise garageServise)
-        {
-            garageServise.GarageId = id;
-            garageServise.Garage = _context.Garages.First(elem => elem.Id == id);
-            //if (ModelState.IsValid)
-            //{
-                garageServise.Id = Guid.NewGuid();
-                _context.Add(garageServise);
+        public async Task<IActionResult> Create(int id, [Bind("Name,Description,Price")] GarageServiseFromForm garageServise)
+        {            
+            if (ModelState.IsValid)
+            {
+                GarageServise newServise = new GarageServise()
+                {
+                    Description = garageServise.Description,
+                    Name = garageServise.Name,
+                    Price = garageServise.Price,
+                    Garage = await _context.Garages.FirstAsync(elem => elem.Id == id),
+                    GarageId = id
+                };
+                _context.Add(newServise);
                 await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
-            //}
-            ViewData["GarageId"] = new SelectList(_context.Garages, "Id", "Id", garageServise.GarageId);
+                return RedirectToAction("Details", "Garages", new { id = id });
+            }
+
             return View(garageServise);
         }
 
@@ -94,7 +109,7 @@ namespace GarageApp.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(Guid id, [Bind("Id,Name,Descripion,Price,GarageId")] GarageServise garageServise)
+        public async Task<IActionResult> Edit(Guid id, [Bind("Id,Name,Description,Price,GarageId")] GarageServise garageServise)
         {
             if (id != garageServise.Id)
             {
