@@ -11,12 +11,35 @@
     <PackageReference Include="Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore" Version="7.0.10" />
     <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="7.0.12" />
     <PackageReference Include="Microsoft.AspNetCore.Identity.UI" Version="7.0.12" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.InMemory" Version="7.0.13" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="7.0.12" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="7.0.12">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="7.0.10" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Remove="GarageAppUnitTests\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Remove="GarageAppUnitTests\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Remove="GarageAppUnitTests\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Remove="GarageAppUnitTests\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <_ContentIncludedByDefault Remove="GarageAppUnitTests\obj\GarageAppUnitTests.csproj.nuget.dgspec.json" />
+    <_ContentIncludedByDefault Remove="GarageAppUnitTests\obj\project.assets.json" />
+    <_ContentIncludedByDefault Remove="GarageAppUnitTests\obj\project.packagespec.json" />
   </ItemGroup>
 
 </Project>
