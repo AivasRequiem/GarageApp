@@ -124,7 +124,7 @@ namespace GarageApp.Controllers
         {
             if (_context.Garages.Any(g => g.Name == garage.Name))
             {
-                return BadRequest();
+                return Problem("Garage with same name exists");
             }
             garage.OwnerId = new Guid(User.FindFirstValue(ClaimTypes.NameIdentifier));
 

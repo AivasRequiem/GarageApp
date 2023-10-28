@@ -9,12 +9,11 @@ namespace GarageApp.Models
         public Guid Id { get; set; }
         [Required]
         public string Name { get; set; }
-        public string? Description { get; set; } //change to Description
+        public string? Description { get; set; }
         public decimal? Price { get; set; }
         [ForeignKey("Garage")]
         public int GarageId { get; set; }
         public Garage Garage { get; set; }
-        //add specialization
         [ForeignKey("Specialization")]
         public Guid SpecializationId { get; set; }
         public Specialization Specialization { get; set; }

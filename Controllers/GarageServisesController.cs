@@ -8,6 +8,7 @@ using Microsoft.EntityFrameworkCore;
 using GarageApp.Data;
 using GarageApp.Models;
 using System.ComponentModel.DataAnnotations;
+using Microsoft.IdentityModel.Tokens;
 
 namespace GarageApp.Controllers
 {
@@ -46,10 +47,24 @@ namespace GarageApp.Controllers
             return View(garageServise);
         }
 
-        // GET: GarageServises/Create/garageId
-        public IActionResult Create(int garageId)
+        // GET: GarageServises/Create/id
+        public IActionResult Create(int id)
         {
-            ViewData["GarageId"] = garageId;
+            ViewData["GarageId"] = id;
+            Garage garage = _context.Garages.Include(g => g.GarageSpecializations)
+                .ThenInclude(gs => gs.Specialization)
+                .FirstOrDefault(g => g.Id == id);
+            var specializations = garage.GarageSpecializations
+                .Select(gs => gs.Specialization)
+                .ToList();
+
+            if (specializations.IsNullOrEmpty())
+            {
+                return Problem("Add specializations to Gatage");
+            }
+
+            ViewBag.Specializations = new SelectList(specializations, "Id", "Name");
+
             return View();
         }
 
@@ -57,9 +72,9 @@ namespace GarageApp.Controllers
         {
             [Required]
             public string Name { get; set; }
-            public string? Description { get; set; } //change to Description
+            public string? Description { get; set; }
             public decimal? Price { get; set; }
-            //add specialization
+            public Guid SpecializationId { get; set; }
         }
 
         // POST: GarageServises/Create/id
@@ -67,7 +82,7 @@ namespace GarageApp.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create(int id, [Bind("Name,Description,Price")] GarageServiseFromForm garageServise)
+        public async Task<IActionResult> Create(int id, [Bind("Name,Description,Price,SpecializationId")] GarageServiseFromForm garageServise)
         {            
             if (ModelState.IsValid)
             {
@@ -77,7 +92,9 @@ namespace GarageApp.Controllers
                     Name = garageServise.Name,
                     Price = garageServise.Price,
                     Garage = await _context.Garages.FirstAsync(elem => elem.Id == id),
-                    GarageId = id
+                    GarageId = id,
+                    SpecializationId = garageServise.SpecializationId,
+                    Specialization = await _context.Specialization.FirstAsync(elem => elem.Id == garageServise.SpecializationId),
                 };
                 _context.Add(newServise);
                 await _context.SaveChangesAsync();
@@ -109,6 +126,7 @@ namespace GarageApp.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        //change here to GarageServiseForm
         public async Task<IActionResult> Edit(Guid id, [Bind("Id,Name,Description,Price,GarageId")] GarageServise garageServise)
         {
             if (id != garageServise.Id)
