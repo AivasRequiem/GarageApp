@@ -58,7 +58,29 @@ namespace GarageApp.Controllers
         [Authorize(Roles = "Admin,garageOwner")]
         public IActionResult Create()
         {
+            ViewBag.Specialization = _context.Specialization.ToList();
             return View();
+        }
+
+        private void addSpecializationToGarage(Garage garage, string[] GarageSpecializations)
+        {
+            if (GarageSpecializations != null)
+            {
+                foreach (var specialization in GarageSpecializations)
+                {
+                    Guid specializationId;
+                    if (Guid.TryParse(specialization, out specializationId))
+                    {
+                        var spec = _context.Specialization.First(elem => elem.Id == specializationId);
+                        garage.GarageSpecializations.Add(new GarageSpecializations()
+                        {
+                            Garage = garage,
+                            Specialization = spec,
+                            SpecializationId = specializationId
+                        });
+                    }
+                }
+            }
         }
 
         // POST: Garages/Create
@@ -67,9 +89,12 @@ namespace GarageApp.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         [Authorize(Roles = "Admin,garageOwner")]
-        public async Task<IActionResult> Create([Bind("Id,Name")] Garage garage)
+        public async Task<IActionResult> Create(Garage garage, string[] GarageSpecializations)
         {
             garage.OwnerId = new Guid(User.FindFirstValue(ClaimTypes.NameIdentifier));
+
+            addSpecializationToGarage(garage, GarageSpecializations);
+
             if (ModelState.IsValid)
             {
                 _context.Add(garage);
@@ -88,7 +113,13 @@ namespace GarageApp.Controllers
                 return NotFound();
             }
 
-            var garage = await _context.Garages.FindAsync(id);
+            ViewBag.Specialization = _context.Specialization.ToList();
+
+            Garage garage = _context.Garages
+                .Include(g => g.GarageSpecializations)
+                .ThenInclude(gs => gs.Specialization)
+                .FirstOrDefault(g => g.Id == id);
+
             if (garage == null)
             {
                 return NotFound();
@@ -102,23 +133,44 @@ namespace GarageApp.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         [Authorize(Roles = "Admin,garageOwner")]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Name")] Garage garage)
+        public async Task<IActionResult> Edit(int id, Garage garage, string[] GarageSpecializations)
         {
             if (id != garage.Id)
             {
                 return NotFound();
             }
 
+            var existingGarage = _context.Garages
+                        .Include(g => g.GarageSpecializations)
+                        .FirstOrDefault(g => g.Id == id);
+
             if (ModelState.IsValid)
             {
+                if (GarageSpecializations != null)
+                {
+
+                    existingGarage.Name = garage.Name;
+                    existingGarage.OwnerId = garage.OwnerId;
+
+                    if (existingGarage.GarageSpecializations != null)
+                    {
+                        existingGarage.GarageSpecializations.Clear();
+                    }
+                    else
+                    {
+                        existingGarage.GarageSpecializations = new List<GarageSpecializations>();
+                    }
+                    
+                    addSpecializationToGarage(existingGarage, GarageSpecializations);
+                }
                 try
                 {
-                    _context.Update(garage);
+                    _context.Update(existingGarage);
                     await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!GarageExists(garage.Id))
+                    if (!GarageExists(existingGarage.Id))
                     {
                         return NotFound();
                     }
@@ -129,7 +181,7 @@ namespace GarageApp.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            return View(garage);
+            return View(existingGarage);
         }
 
         // GET: Garages/Delete/5
