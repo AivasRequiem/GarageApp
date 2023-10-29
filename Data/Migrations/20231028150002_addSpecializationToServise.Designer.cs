@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace GarageApp.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20231028150002_addSpecializationToServise")]
-    partial class addSpecializationToServise
+    [Migration("20231028150002_addSpecializationToService")]
+    partial class addSpecializationToService
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -50,7 +50,7 @@ namespace GarageApp.Data.Migrations
                     b.ToTable("Garages");
                 });
 
-            modelBuilder.Entity("GarageApp.Models.GarageServise", b =>
+            modelBuilder.Entity("GarageApp.Models.GarageService", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
@@ -78,7 +78,7 @@ namespace GarageApp.Data.Migrations
 
                     b.HasIndex("SpecializationId");
 
-                    b.ToTable("GarageServise");
+                    b.ToTable("GarageService");
                 });
 
             modelBuilder.Entity("GarageApp.Models.GarageSpecializations", b =>
@@ -313,7 +313,7 @@ namespace GarageApp.Data.Migrations
                     b.ToTable("AspNetUserTokens", (string)null);
                 });
 
-            modelBuilder.Entity("GarageApp.Models.GarageServise", b =>
+            modelBuilder.Entity("GarageApp.Models.GarageService", b =>
                 {
                     b.HasOne("GarageApp.Models.Garage", "Garage")
                         .WithMany()

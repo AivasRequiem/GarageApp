@@ -47,7 +47,7 @@ namespace GarageApp.Data.Migrations
                     b.ToTable("Garages");
                 });
 
-            modelBuilder.Entity("GarageApp.Models.GarageServise", b =>
+            modelBuilder.Entity("GarageApp.Models.GarageService", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
@@ -75,7 +75,7 @@ namespace GarageApp.Data.Migrations
 
                     b.HasIndex("SpecializationId");
 
-                    b.ToTable("GarageServise");
+                    b.ToTable("GarageService");
                 });
 
             modelBuilder.Entity("GarageApp.Models.GarageSpecializations", b =>
@@ -310,7 +310,7 @@ namespace GarageApp.Data.Migrations
                     b.ToTable("AspNetUserTokens", (string)null);
                 });
 
-            modelBuilder.Entity("GarageApp.Models.GarageServise", b =>
+            modelBuilder.Entity("GarageApp.Models.GarageService", b =>
                 {
                     b.HasOne("GarageApp.Models.Garage", "Garage")
                         .WithMany()

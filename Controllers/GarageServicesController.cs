@@ -22,14 +22,14 @@ namespace GarageApp.Controllers
             _context = context;
         }
 
-        // GET: GarageServises
+        // GET: GarageServices
         public async Task<IActionResult> Index()
         {
             var applicationDbContext = _context.GarageService.Include(g => g.Garage);
             return View(await applicationDbContext.ToListAsync());
         }
 
-        // GET: GarageServises/Details/5
+        // GET: GarageServices/Details/5
         public async Task<IActionResult> Details(Guid? id)
         {
             if (id == null || _context.GarageService == null)
@@ -48,7 +48,7 @@ namespace GarageApp.Controllers
             return View(garageService);
         }
 
-        // GET: GarageServises/Create/id
+        // GET: GarageServices/Create/id
         public IActionResult Create(int id)
         {
             ViewData["GarageId"] = id;
@@ -78,7 +78,7 @@ namespace GarageApp.Controllers
             public Guid SpecializationId { get; set; }
         }
 
-        // POST: GarageServises/Create/id
+        // POST: GarageServices/Create/id
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
@@ -87,7 +87,7 @@ namespace GarageApp.Controllers
         {            
             if (ModelState.IsValid)
             {
-                GarageService newServise = new GarageService()
+                GarageService newService = new GarageService()
                 {
                     Description = garageService.Description,
                     Name = garageService.Name,
@@ -97,7 +97,7 @@ namespace GarageApp.Controllers
                     SpecializationId = garageService.SpecializationId,
                     Specialization = await _context.Specialization.FirstAsync(elem => elem.Id == garageService.SpecializationId),
                 };
-                _context.Add(newServise);
+                _context.Add(newService);
                 await _context.SaveChangesAsync();
                 return RedirectToAction("Details", "Garages", new { id = id });
             }
@@ -105,7 +105,7 @@ namespace GarageApp.Controllers
             return View(garageService);
         }
 
-        // GET: GarageServises/Edit/5
+        // GET: GarageServices/Edit/5
         public async Task<IActionResult> Edit(Guid? id)
         {
             if (id == null || _context.GarageService == null)
@@ -122,12 +122,12 @@ namespace GarageApp.Controllers
             return View(garageService);
         }
 
-        // POST: GarageServises/Edit/5
+        // POST: GarageServices/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        //change here to GarageServiseForm
+        //change here to GarageServiceForm
         public async Task<IActionResult> Edit(Guid id, [Bind("Id,Name,Description,Price,GarageId")] GarageService garageService)
         {
             if (id != garageService.Id)
@@ -144,7 +144,7 @@ namespace GarageApp.Controllers
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!GarageServiseExists(garageService.Id))
+                    if (!GarageServiceExists(garageService.Id))
                     {
                         return NotFound();
                     }
@@ -159,7 +159,7 @@ namespace GarageApp.Controllers
             return View(garageService);
         }
 
-        // GET: GarageServises/Delete/5
+        // GET: GarageServices/Delete/5
         public async Task<IActionResult> Delete(Guid? id)
         {
             if (id == null || _context.GarageService == null)
@@ -178,7 +178,7 @@ namespace GarageApp.Controllers
             return View(garageService);
         }
 
-        // POST: GarageServises/Delete/5
+        // POST: GarageServices/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(Guid id)
@@ -197,7 +197,7 @@ namespace GarageApp.Controllers
             return RedirectToAction(nameof(Index));
         }
 
-        private bool GarageServiseExists(Guid id)
+        private bool GarageServiceExists(Guid id)
         {
           return (_context.GarageService?.Any(e => e.Id == id)).GetValueOrDefault();
         }

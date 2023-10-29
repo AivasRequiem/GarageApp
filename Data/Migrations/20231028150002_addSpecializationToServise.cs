@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace GarageApp.Data.Migrations
 {
     /// <inheritdoc />
-    public partial class addSpecializationToServise : Migration
+    public partial class addSpecializationToService : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -19,12 +19,12 @@ namespace GarageApp.Data.Migrations
                 defaultValue: new Guid("00000000-0000-0000-0000-000000000000"));
 
             migrationBuilder.CreateIndex(
-                name: "IX_GarageServise_SpecializationId",
+                name: "IX_GarageService_SpecializationId",
                 table: "GarageService",
                 column: "SpecializationId");
 
             migrationBuilder.AddForeignKey(
-                name: "FK_GarageServise_Specialization_SpecializationId",
+                name: "FK_GarageService_Specialization_SpecializationId",
                 table: "GarageService",
                 column: "SpecializationId",
                 principalTable: "Specialization",
@@ -36,11 +36,11 @@ namespace GarageApp.Data.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropForeignKey(
-                name: "FK_GarageServise_Specialization_SpecializationId",
+                name: "FK_GarageService_Specialization_SpecializationId",
                 table: "GarageService");
 
             migrationBuilder.DropIndex(
-                name: "IX_GarageServise_SpecializationId",
+                name: "IX_GarageService_SpecializationId",
                 table: "GarageService");
 
             migrationBuilder.DropColumn(

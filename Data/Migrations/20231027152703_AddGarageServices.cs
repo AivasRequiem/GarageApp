@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace GarageApp.Data.Migrations
 {
     /// <inheritdoc />
-    public partial class AddGarageServises : Migration
+    public partial class AddGarageServices : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)

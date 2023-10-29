@@ -81,7 +81,7 @@ namespace GarageApp.Controllers
                 return NotFound();
             }
 
-            ViewBag.GarageServises = await _context.GarageService.Where(elem => elem.GarageId == id).ToListAsync();
+            ViewBag.GarageServices = await _context.GarageService.Where(elem => elem.GarageId == id).ToListAsync();
             return View(garage);
         }
 
