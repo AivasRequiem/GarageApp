@@ -29,11 +29,16 @@ namespace GarageApp.Data
                 .WithMany()
                 .HasForeignKey(gr => gr.SpecializationId);
 
+            modelBuilder.Entity<BookingSlot>()
+                .HasKey(slot => new { slot.GarageServiceId, slot.Date });
+
         }
 
         public DbSet<Specialization> Specialization { get; set; } = default!;
 
-        public DbSet<GarageApp.Models.GarageService> GarageService { get; set; } = default!;
+        public DbSet<GarageService> GarageService { get; set; } = default!;
+
+        public DbSet<BookingSlot> BookingSlot { get; set; } = default!;
 
     }
 }
