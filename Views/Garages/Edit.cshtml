@@ -19,6 +19,16 @@
                 <span asp-validation-for="Name" class="text-danger"></span>
             </div>
             <div class="form-group">
+                <label asp-for="Description" class="control-label"></label>
+                <input asp-for="Description" class="form-control" />
+                <span asp-validation-for="Description" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="AwailablePlaces" class="control-label"></label>
+                <input type="number" asp-for="AwailablePlaces" class="form-control" />
+                <span asp-validation-for="AwailablePlaces" class="text-danger"></span>
+            </div>
+            <div class="form-group">
                 <label asp-for="GarageSpecializations" class="control-label">Garage Specializations</label>
                 <input type="hidden" asp-for="GarageSpecializations" />
                 @foreach (var specialization in ViewBag.Specialization)
