@@ -1,4 +1,12 @@
-﻿<!DOCTYPE html>
+﻿@using System.Security.Claims;
+
+@{
+    bool isLoggedIn = User.FindFirstValue(ClaimTypes.NameIdentifier) != null;
+}
+
+
+
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8" />
@@ -25,9 +33,12 @@
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="Garages" asp-action="Index">Garages</a>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="BookingSlots" asp-action="Index">My bookings</a>
-                        </li>
+                        @if (isLoggedIn)
+                        {
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="" asp-controller="BookingSlots" asp-action="Index">My bookings</a>
+                            </li>
+                        }
                     </ul>
                     <partial name="_LoginPartial" />
                 </div>
