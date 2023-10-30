@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<dataSource name="Microsoft SQL Server (JetBrains)">
+<dataSource name="aspnet-GarageApp-74366de4-b65e-41e6-925a-368d9d50524d">
   <database-model serializer="dbm" dbms="MSSQL_LOCALDB" family-id="MSSQL_LOCALDB" format-version="4.49">
     <root id="1">
       <Dbms>MSSQL_LOCALDB</Dbms>
@@ -16687,84 +16687,84 @@
       <ObjectId>1</ObjectId>
       <Visible>1</Visible>
     </assembly>
-    <role id="5537" parent="5511" name="public">
-      <AuthType>none</AuthType>
-      <ObjectId>0</ObjectId>
-      <Type>database-role</Type>
-      <OwnerId>1</OwnerId>
-    </role>
-    <role id="5538" parent="5511" name="dbo">
-      <AuthType>windows</AuthType>
-      <DefaultSchema>dbo</DefaultSchema>
-      <ObjectId>1</ObjectId>
-      <Type>windows-user</Type>
-    </role>
-    <role id="5539" parent="5511" name="guest">
-      <AuthType>none</AuthType>
-      <DefaultSchema>guest</DefaultSchema>
-      <ObjectId>2</ObjectId>
-    </role>
-    <role id="5540" parent="5511" name="INFORMATION_SCHEMA">
+    <role id="5537" parent="5511" name="INFORMATION_SCHEMA">
       <AuthType>none</AuthType>
       <ObjectId>3</ObjectId>
     </role>
-    <role id="5541" parent="5511" name="sys">
-      <AuthType>none</AuthType>
-      <ObjectId>4</ObjectId>
-    </role>
-    <role id="5542" parent="5511" name="db_owner">
-      <AuthType>none</AuthType>
-      <ObjectId>16384</ObjectId>
-      <Type>database-role</Type>
-      <OwnerId>1</OwnerId>
-    </role>
-    <role id="5543" parent="5511" name="db_accessadmin">
+    <role id="5538" parent="5511" name="db_accessadmin">
       <AuthType>none</AuthType>
       <ObjectId>16385</ObjectId>
       <Type>database-role</Type>
       <OwnerId>1</OwnerId>
     </role>
-    <role id="5544" parent="5511" name="db_securityadmin">
-      <AuthType>none</AuthType>
-      <ObjectId>16386</ObjectId>
-      <Type>database-role</Type>
-      <OwnerId>1</OwnerId>
-    </role>
-    <role id="5545" parent="5511" name="db_ddladmin">
-      <AuthType>none</AuthType>
-      <ObjectId>16387</ObjectId>
-      <Type>database-role</Type>
-      <OwnerId>1</OwnerId>
-    </role>
-    <role id="5546" parent="5511" name="db_backupoperator">
+    <role id="5539" parent="5511" name="db_backupoperator">
       <AuthType>none</AuthType>
       <ObjectId>16389</ObjectId>
       <Type>database-role</Type>
       <OwnerId>1</OwnerId>
     </role>
-    <role id="5547" parent="5511" name="db_datareader">
+    <role id="5540" parent="5511" name="db_datareader">
       <AuthType>none</AuthType>
       <ObjectId>16390</ObjectId>
       <Type>database-role</Type>
       <OwnerId>1</OwnerId>
     </role>
-    <role id="5548" parent="5511" name="db_datawriter">
+    <role id="5541" parent="5511" name="db_datawriter">
       <AuthType>none</AuthType>
       <ObjectId>16391</ObjectId>
       <Type>database-role</Type>
       <OwnerId>1</OwnerId>
     </role>
-    <role id="5549" parent="5511" name="db_denydatareader">
+    <role id="5542" parent="5511" name="db_ddladmin">
+      <AuthType>none</AuthType>
+      <ObjectId>16387</ObjectId>
+      <Type>database-role</Type>
+      <OwnerId>1</OwnerId>
+    </role>
+    <role id="5543" parent="5511" name="db_denydatareader">
       <AuthType>none</AuthType>
       <ObjectId>16392</ObjectId>
       <Type>database-role</Type>
       <OwnerId>1</OwnerId>
     </role>
-    <role id="5550" parent="5511" name="db_denydatawriter">
+    <role id="5544" parent="5511" name="db_denydatawriter">
       <AuthType>none</AuthType>
       <ObjectId>16393</ObjectId>
       <Type>database-role</Type>
       <OwnerId>1</OwnerId>
+    </role>
+    <role id="5545" parent="5511" name="db_owner">
+      <AuthType>none</AuthType>
+      <ObjectId>16384</ObjectId>
+      <Type>database-role</Type>
+      <OwnerId>1</OwnerId>
+    </role>
+    <role id="5546" parent="5511" name="db_securityadmin">
+      <AuthType>none</AuthType>
+      <ObjectId>16386</ObjectId>
+      <Type>database-role</Type>
+      <OwnerId>1</OwnerId>
+    </role>
+    <role id="5547" parent="5511" name="dbo">
+      <AuthType>windows</AuthType>
+      <DefaultSchema>dbo</DefaultSchema>
+      <ObjectId>1</ObjectId>
+      <Type>windows-user</Type>
+    </role>
+    <role id="5548" parent="5511" name="guest">
+      <AuthType>none</AuthType>
+      <DefaultSchema>guest</DefaultSchema>
+      <ObjectId>2</ObjectId>
+    </role>
+    <role id="5549" parent="5511" name="public">
+      <AuthType>none</AuthType>
+      <ObjectId>0</ObjectId>
+      <Type>database-role</Type>
+      <OwnerId>1</OwnerId>
+    </role>
+    <role id="5550" parent="5511" name="sys">
+      <AuthType>none</AuthType>
+      <ObjectId>4</ObjectId>
     </role>
     <schema id="5551" parent="5511" name="INFORMATION_SCHEMA">
       <ObjectId>3</ObjectId>
@@ -16798,8 +16798,8 @@
     </schema>
     <schema id="5561" parent="5511" name="dbo">
       <Current>1</Current>
-      <IntrospectionTimestamp>2023-10-28.01:19:15.710</IntrospectionTimestamp>
-      <LocalIntrospectionTimestamp>2023-10-27.19:19:15</LocalIntrospectionTimestamp>
+      <IntrospectionTimestamp>2023-10-29.16:47:26.440</IntrospectionTimestamp>
+      <LocalIntrospectionTimestamp>2023-10-29.12:47:26</LocalIntrospectionTimestamp>
       <ObjectId>1</ObjectId>
     </schema>
     <schema id="5562" parent="5511" name="guest">
@@ -16808,304 +16808,169 @@
     <schema id="5563" parent="5511" name="sys">
       <ObjectId>4</ObjectId>
     </schema>
-    <table id="5564" parent="5561" name="AspNetRoleClaims">
+    <table id="5564" parent="5561" name="AspNetRoles">
       <CreatedTimestamp>2023-10-25.03:47:13.867</CreatedTimestamp>
-      <ModifiedTimestamp>2023-10-25.03:47:13.870</ModifiedTimestamp>
-      <ObjectId>981578535</ObjectId>
-    </table>
-    <table id="5565" parent="5561" name="AspNetRoles">
-      <CreatedTimestamp>2023-10-25.03:47:13.867</CreatedTimestamp>
-      <ModifiedTimestamp>2023-10-25.03:47:13.877</ModifiedTimestamp>
+      <ModifiedTimestamp>2023-10-29.16:47:18.630</ModifiedTimestamp>
       <ObjectId>917578307</ObjectId>
     </table>
-    <table id="5566" parent="5561" name="AspNetUserClaims">
-      <CreatedTimestamp>2023-10-25.03:47:13.867</CreatedTimestamp>
-      <ModifiedTimestamp>2023-10-25.03:47:13.870</ModifiedTimestamp>
-      <ObjectId>1029578706</ObjectId>
+    <table id="5565" parent="5561" name="AspNetRoles">
+      <CreatedTimestamp>2023-10-29.16:47:46.663</CreatedTimestamp>
+      <ModifiedTimestamp>2023-10-29.16:47:46.673</ModifiedTimestamp>
+      <ObjectId>1330103779</ObjectId>
     </table>
-    <table id="5567" parent="5561" name="AspNetUserLogins">
-      <CreatedTimestamp>2023-10-25.03:47:13.870</CreatedTimestamp>
-      <ModifiedTimestamp>2023-10-25.03:47:13.873</ModifiedTimestamp>
-      <ObjectId>1077578877</ObjectId>
-    </table>
-    <table id="5568" parent="5561" name="AspNetUserRoles">
-      <CreatedTimestamp>2023-10-25.03:47:13.870</CreatedTimestamp>
-      <ModifiedTimestamp>2023-10-25.03:47:13.873</ModifiedTimestamp>
-      <ObjectId>1125579048</ObjectId>
-    </table>
-    <table id="5569" parent="5561" name="AspNetUserTokens">
+    <table id="5566" parent="5561" name="AspNetUserTokens">
       <CreatedTimestamp>2023-10-25.03:47:13.870</CreatedTimestamp>
       <ModifiedTimestamp>2023-10-25.03:47:13.870</ModifiedTimestamp>
       <ObjectId>1189579276</ObjectId>
     </table>
-    <table id="5570" parent="5561" name="AspNetUsers">
+    <table id="5567" parent="5561" name="AspNetUserTokens">
+      <CreatedTimestamp>2023-10-29.16:47:46.667</CreatedTimestamp>
+      <ModifiedTimestamp>2023-10-29.16:47:46.667</ModifiedTimestamp>
+      <ObjectId>1602104748</ObjectId>
+    </table>
+    <table id="5568" parent="5561" name="AspNetUsers">
       <CreatedTimestamp>2023-10-25.03:47:13.867</CreatedTimestamp>
-      <ModifiedTimestamp>2023-10-25.03:47:13.887</ModifiedTimestamp>
+      <ModifiedTimestamp>2023-10-29.16:47:18.637</ModifiedTimestamp>
       <ObjectId>949578421</ObjectId>
     </table>
-    <table id="5571" parent="5561" name="GarageSpecializations">
+    <table id="5569" parent="5561" name="AspNetUsers">
+      <CreatedTimestamp>2023-10-29.16:47:46.663</CreatedTimestamp>
+      <ModifiedTimestamp>2023-10-29.16:47:46.683</ModifiedTimestamp>
+      <ObjectId>1362103893</ObjectId>
+    </table>
+    <table id="5570" parent="5561" name="GarageSpecializations">
       <CreatedTimestamp>2023-10-27.23:23:45.647</CreatedTimestamp>
       <ModifiedTimestamp>2023-10-27.23:23:45.650</ModifiedTimestamp>
       <ObjectId>1877581727</ObjectId>
     </table>
+    <table id="5571" parent="5561" name="GarageSpecializations">
+      <CreatedTimestamp>2023-10-29.16:47:46.697</CreatedTimestamp>
+      <ModifiedTimestamp>2023-10-29.16:47:46.700</ModifiedTimestamp>
+      <ObjectId>1730105204</ObjectId>
+    </table>
     <table id="5572" parent="5561" name="Garages">
       <CreatedTimestamp>2023-10-25.03:47:13.880</CreatedTimestamp>
-      <ModifiedTimestamp>2023-10-27.23:23:45.647</ModifiedTimestamp>
+      <ModifiedTimestamp>2023-10-29.01:33:15.783</ModifiedTimestamp>
       <ObjectId>1237579447</ObjectId>
     </table>
-    <table id="5573" parent="5561" name="Specialization">
+    <table id="5573" parent="5561" name="Garages">
+      <CreatedTimestamp>2023-10-29.16:47:46.677</CreatedTimestamp>
+      <ModifiedTimestamp>2023-10-29.16:47:46.710</ModifiedTimestamp>
+      <ObjectId>1650104919</ObjectId>
+    </table>
+    <table id="5574" parent="5561" name="Specialization">
       <CreatedTimestamp>2023-10-27.23:23:45.640</CreatedTimestamp>
-      <ModifiedTimestamp>2023-10-27.23:23:45.647</ModifiedTimestamp>
+      <ModifiedTimestamp>2023-10-29.01:33:15.783</ModifiedTimestamp>
       <ObjectId>1845581613</ObjectId>
+      <Outdated>1</Outdated>
     </table>
-    <table id="5574" parent="5561" name="__EFMigrationsHistory">
-      <CreatedTimestamp>2023-10-25.03:47:13.830</CreatedTimestamp>
-      <ModifiedTimestamp>2023-10-25.03:47:13.830</ModifiedTimestamp>
-      <ObjectId>885578193</ObjectId>
+    <table id="5575" parent="5561" name="Specialization">
+      <CreatedTimestamp>2023-10-29.16:47:46.697</CreatedTimestamp>
+      <ModifiedTimestamp>2023-10-29.16:47:46.710</ModifiedTimestamp>
+      <ObjectId>1698105090</ObjectId>
     </table>
-    <column id="5575" parent="5564" name="Id">
-      <DasType>int|0s</DasType>
-      <NotNull>1</NotNull>
-      <Position>1</Position>
-      <SequenceIdentity>1</SequenceIdentity>
-    </column>
-    <column id="5576" parent="5564" name="RoleId">
+    <table id="5576" parent="5561" name="__EFMigrationsHistory">
+      <CreatedTimestamp>2023-10-29.16:41:42.520</CreatedTimestamp>
+      <ModifiedTimestamp>2023-10-29.16:41:42.520</ModifiedTimestamp>
+      <ObjectId>658101385</ObjectId>
+    </table>
+    <table id="5577" parent="5561" name="__EFMigrationsHistory">
+      <CreatedTimestamp>2023-10-29.16:47:46.637</CreatedTimestamp>
+      <ModifiedTimestamp>2023-10-29.16:47:46.637</ModifiedTimestamp>
+      <ObjectId>1298103665</ObjectId>
+    </table>
+    <column id="5578" parent="5564" name="Id">
       <DasType>nvarchar(450 char)|0s</DasType>
       <NotNull>1</NotNull>
+      <Position>1</Position>
+    </column>
+    <column id="5579" parent="5564" name="Name">
+      <DasType>nvarchar(256 char)|0s</DasType>
       <Position>2</Position>
     </column>
-    <column id="5577" parent="5564" name="ClaimType">
-      <DasType>nvarchar(max)|0s</DasType>
+    <column id="5580" parent="5564" name="NormalizedName">
+      <DasType>nvarchar(256 char)|0s</DasType>
       <Position>3</Position>
     </column>
-    <column id="5578" parent="5564" name="ClaimValue">
+    <column id="5581" parent="5564" name="ConcurrencyStamp">
       <DasType>nvarchar(max)|0s</DasType>
       <Position>4</Position>
     </column>
-    <foreign-key id="5579" parent="5564" name="FK_AspNetRoleClaims_AspNetRoles_RoleId">
-      <ColNames>RoleId</ColNames>
-      <CreatedTimestamp>2023-10-25.03:47:13.867</CreatedTimestamp>
-      <ModifiedTimestamp>2023-10-25.03:47:13.867</ModifiedTimestamp>
-      <ObjectId>1013578649</ObjectId>
-      <OnDelete>cascade</OnDelete>
-      <RefColNames>Id</RefColNames>
-      <RefTableId>917578307</RefTableId>
-      <RefTableName>AspNetRoles</RefTableName>
-    </foreign-key>
-    <index id="5580" parent="5564" name="PK_AspNetRoleClaims">
+    <index id="5582" parent="5564" name="PK_AspNetRoles">
       <Clustering>1</Clustering>
       <ColNames>Id</ColNames>
       <Position>1</Position>
       <Unique>1</Unique>
     </index>
-    <index id="5581" parent="5564" name="IX_AspNetRoleClaims_RoleId">
-      <ColNames>RoleId</ColNames>
-      <Position>2</Position>
-    </index>
-    <key id="5582" parent="5564" name="PK_AspNetRoleClaims">
-      <CreatedTimestamp>2023-10-25.03:47:13.867</CreatedTimestamp>
-      <ModifiedTimestamp>2023-10-25.03:47:13.867</ModifiedTimestamp>
-      <ObjectId>997578592</ObjectId>
-      <Primary>1</Primary>
-      <UnderlyingIndexName>PK_AspNetRoleClaims</UnderlyingIndexName>
-    </key>
-    <column id="5583" parent="5565" name="Id">
-      <DasType>nvarchar(450 char)|0s</DasType>
-      <NotNull>1</NotNull>
-      <Position>1</Position>
-    </column>
-    <column id="5584" parent="5565" name="Name">
-      <DasType>nvarchar(256 char)|0s</DasType>
-      <Position>2</Position>
-    </column>
-    <column id="5585" parent="5565" name="NormalizedName">
-      <DasType>nvarchar(256 char)|0s</DasType>
-      <Position>3</Position>
-    </column>
-    <column id="5586" parent="5565" name="ConcurrencyStamp">
-      <DasType>nvarchar(max)|0s</DasType>
-      <Position>4</Position>
-    </column>
-    <index id="5587" parent="5565" name="PK_AspNetRoles">
-      <Clustering>1</Clustering>
-      <ColNames>Id</ColNames>
-      <Position>1</Position>
-      <Unique>1</Unique>
-    </index>
-    <index id="5588" parent="5565" name="RoleNameIndex">
+    <index id="5583" parent="5564" name="RoleNameIndex">
       <ColNames>NormalizedName</ColNames>
       <Condition>[NormalizedName] IS NOT NULL</Condition>
       <Position>2</Position>
       <Unique>1</Unique>
     </index>
-    <key id="5589" parent="5565" name="PK_AspNetRoles">
+    <key id="5584" parent="5564" name="PK_AspNetRoles">
       <CreatedTimestamp>2023-10-25.03:47:13.867</CreatedTimestamp>
       <ModifiedTimestamp>2023-10-25.03:47:13.867</ModifiedTimestamp>
       <ObjectId>933578364</ObjectId>
       <Primary>1</Primary>
       <UnderlyingIndexName>PK_AspNetRoles</UnderlyingIndexName>
     </key>
-    <column id="5590" parent="5566" name="Id">
-      <DasType>int|0s</DasType>
-      <NotNull>1</NotNull>
-      <Position>1</Position>
-      <SequenceIdentity>1</SequenceIdentity>
-    </column>
-    <column id="5591" parent="5566" name="UserId">
+    <column id="5585" parent="5565" name="Id">
       <DasType>nvarchar(450 char)|0s</DasType>
       <NotNull>1</NotNull>
+      <Position>1</Position>
+    </column>
+    <column id="5586" parent="5565" name="Name">
+      <DasType>nvarchar(256 char)|0s</DasType>
       <Position>2</Position>
     </column>
-    <column id="5592" parent="5566" name="ClaimType">
-      <DasType>nvarchar(max)|0s</DasType>
+    <column id="5587" parent="5565" name="NormalizedName">
+      <DasType>nvarchar(256 char)|0s</DasType>
       <Position>3</Position>
     </column>
-    <column id="5593" parent="5566" name="ClaimValue">
+    <column id="5588" parent="5565" name="ConcurrencyStamp">
       <DasType>nvarchar(max)|0s</DasType>
       <Position>4</Position>
     </column>
-    <foreign-key id="5594" parent="5566" name="FK_AspNetUserClaims_AspNetUsers_UserId">
-      <ColNames>UserId</ColNames>
-      <CreatedTimestamp>2023-10-25.03:47:13.867</CreatedTimestamp>
-      <ModifiedTimestamp>2023-10-25.03:47:13.867</ModifiedTimestamp>
-      <ObjectId>1061578820</ObjectId>
-      <OnDelete>cascade</OnDelete>
-      <RefColNames>Id</RefColNames>
-      <RefTableId>949578421</RefTableId>
-      <RefTableName>AspNetUsers</RefTableName>
-    </foreign-key>
-    <index id="5595" parent="5566" name="PK_AspNetUserClaims">
+    <index id="5589" parent="5565" name="PK_AspNetRoles">
       <Clustering>1</Clustering>
       <ColNames>Id</ColNames>
       <Position>1</Position>
       <Unique>1</Unique>
     </index>
-    <index id="5596" parent="5566" name="IX_AspNetUserClaims_UserId">
-      <ColNames>UserId</ColNames>
+    <index id="5590" parent="5565" name="RoleNameIndex">
+      <ColNames>NormalizedName</ColNames>
+      <Condition>[NormalizedName] IS NOT NULL</Condition>
       <Position>2</Position>
-    </index>
-    <key id="5597" parent="5566" name="PK_AspNetUserClaims">
-      <CreatedTimestamp>2023-10-25.03:47:13.867</CreatedTimestamp>
-      <ModifiedTimestamp>2023-10-25.03:47:13.867</ModifiedTimestamp>
-      <ObjectId>1045578763</ObjectId>
-      <Primary>1</Primary>
-      <UnderlyingIndexName>PK_AspNetUserClaims</UnderlyingIndexName>
-    </key>
-    <column id="5598" parent="5567" name="LoginProvider">
-      <DasType>nvarchar(128 char)|0s</DasType>
-      <NotNull>1</NotNull>
-      <Position>1</Position>
-    </column>
-    <column id="5599" parent="5567" name="ProviderKey">
-      <DasType>nvarchar(128 char)|0s</DasType>
-      <NotNull>1</NotNull>
-      <Position>2</Position>
-    </column>
-    <column id="5600" parent="5567" name="ProviderDisplayName">
-      <DasType>nvarchar(max)|0s</DasType>
-      <Position>3</Position>
-    </column>
-    <column id="5601" parent="5567" name="UserId">
-      <DasType>nvarchar(450 char)|0s</DasType>
-      <NotNull>1</NotNull>
-      <Position>4</Position>
-    </column>
-    <foreign-key id="5602" parent="5567" name="FK_AspNetUserLogins_AspNetUsers_UserId">
-      <ColNames>UserId</ColNames>
-      <CreatedTimestamp>2023-10-25.03:47:13.870</CreatedTimestamp>
-      <ModifiedTimestamp>2023-10-25.03:47:13.870</ModifiedTimestamp>
-      <ObjectId>1109578991</ObjectId>
-      <OnDelete>cascade</OnDelete>
-      <RefColNames>Id</RefColNames>
-      <RefTableId>949578421</RefTableId>
-      <RefTableName>AspNetUsers</RefTableName>
-    </foreign-key>
-    <index id="5603" parent="5567" name="PK_AspNetUserLogins">
-      <Clustering>1</Clustering>
-      <ColNames>LoginProvider
-ProviderKey</ColNames>
-      <Position>1</Position>
       <Unique>1</Unique>
     </index>
-    <index id="5604" parent="5567" name="IX_AspNetUserLogins_UserId">
-      <ColNames>UserId</ColNames>
-      <Position>2</Position>
-    </index>
-    <key id="5605" parent="5567" name="PK_AspNetUserLogins">
-      <CreatedTimestamp>2023-10-25.03:47:13.870</CreatedTimestamp>
-      <ModifiedTimestamp>2023-10-25.03:47:13.870</ModifiedTimestamp>
-      <ObjectId>1093578934</ObjectId>
+    <key id="5591" parent="5565" name="PK_AspNetRoles">
+      <CreatedTimestamp>2023-10-29.16:47:46.663</CreatedTimestamp>
+      <ModifiedTimestamp>2023-10-29.16:47:46.663</ModifiedTimestamp>
+      <ObjectId>1346103836</ObjectId>
       <Primary>1</Primary>
-      <UnderlyingIndexName>PK_AspNetUserLogins</UnderlyingIndexName>
+      <UnderlyingIndexName>PK_AspNetRoles</UnderlyingIndexName>
     </key>
-    <column id="5606" parent="5568" name="UserId">
+    <column id="5592" parent="5566" name="UserId">
       <DasType>nvarchar(450 char)|0s</DasType>
       <NotNull>1</NotNull>
       <Position>1</Position>
     </column>
-    <column id="5607" parent="5568" name="RoleId">
-      <DasType>nvarchar(450 char)|0s</DasType>
-      <NotNull>1</NotNull>
-      <Position>2</Position>
-    </column>
-    <foreign-key id="5608" parent="5568" name="FK_AspNetUserRoles_AspNetUsers_UserId">
-      <ColNames>UserId</ColNames>
-      <CreatedTimestamp>2023-10-25.03:47:13.870</CreatedTimestamp>
-      <ModifiedTimestamp>2023-10-25.03:47:13.870</ModifiedTimestamp>
-      <ObjectId>1173579219</ObjectId>
-      <OnDelete>cascade</OnDelete>
-      <RefColNames>Id</RefColNames>
-      <RefTableId>949578421</RefTableId>
-      <RefTableName>AspNetUsers</RefTableName>
-    </foreign-key>
-    <foreign-key id="5609" parent="5568" name="FK_AspNetUserRoles_AspNetRoles_RoleId">
-      <ColNames>RoleId</ColNames>
-      <CreatedTimestamp>2023-10-25.03:47:13.870</CreatedTimestamp>
-      <ModifiedTimestamp>2023-10-25.03:47:13.870</ModifiedTimestamp>
-      <ObjectId>1157579162</ObjectId>
-      <OnDelete>cascade</OnDelete>
-      <RefColNames>Id</RefColNames>
-      <RefTableId>917578307</RefTableId>
-      <RefTableName>AspNetRoles</RefTableName>
-    </foreign-key>
-    <index id="5610" parent="5568" name="PK_AspNetUserRoles">
-      <Clustering>1</Clustering>
-      <ColNames>UserId
-RoleId</ColNames>
-      <Position>1</Position>
-      <Unique>1</Unique>
-    </index>
-    <index id="5611" parent="5568" name="IX_AspNetUserRoles_RoleId">
-      <ColNames>RoleId</ColNames>
-      <Position>2</Position>
-    </index>
-    <key id="5612" parent="5568" name="PK_AspNetUserRoles">
-      <CreatedTimestamp>2023-10-25.03:47:13.870</CreatedTimestamp>
-      <ModifiedTimestamp>2023-10-25.03:47:13.870</ModifiedTimestamp>
-      <ObjectId>1141579105</ObjectId>
-      <Primary>1</Primary>
-      <UnderlyingIndexName>PK_AspNetUserRoles</UnderlyingIndexName>
-    </key>
-    <column id="5613" parent="5569" name="UserId">
-      <DasType>nvarchar(450 char)|0s</DasType>
-      <NotNull>1</NotNull>
-      <Position>1</Position>
-    </column>
-    <column id="5614" parent="5569" name="LoginProvider">
+    <column id="5593" parent="5566" name="LoginProvider">
       <DasType>nvarchar(128 char)|0s</DasType>
       <NotNull>1</NotNull>
       <Position>2</Position>
     </column>
-    <column id="5615" parent="5569" name="Name">
+    <column id="5594" parent="5566" name="Name">
       <DasType>nvarchar(128 char)|0s</DasType>
       <NotNull>1</NotNull>
       <Position>3</Position>
     </column>
-    <column id="5616" parent="5569" name="Value">
+    <column id="5595" parent="5566" name="Value">
       <DasType>nvarchar(max)|0s</DasType>
       <Position>4</Position>
     </column>
-    <foreign-key id="5617" parent="5569" name="FK_AspNetUserTokens_AspNetUsers_UserId">
+    <foreign-key id="5596" parent="5566" name="FK_AspNetUserTokens_AspNetUsers_UserId">
       <ColNames>UserId</ColNames>
       <CreatedTimestamp>2023-10-25.03:47:13.870</CreatedTimestamp>
       <ModifiedTimestamp>2023-10-25.03:47:13.870</ModifiedTimestamp>
@@ -17115,7 +16980,7 @@ RoleId</ColNames>
       <RefTableId>949578421</RefTableId>
       <RefTableName>AspNetUsers</RefTableName>
     </foreign-key>
-    <index id="5618" parent="5569" name="PK_AspNetUserTokens">
+    <index id="5597" parent="5566" name="PK_AspNetUserTokens">
       <Clustering>1</Clustering>
       <ColNames>UserId
 LoginProvider
@@ -17123,113 +16988,246 @@ Name</ColNames>
       <Position>1</Position>
       <Unique>1</Unique>
     </index>
-    <key id="5619" parent="5569" name="PK_AspNetUserTokens">
+    <key id="5598" parent="5566" name="PK_AspNetUserTokens">
       <CreatedTimestamp>2023-10-25.03:47:13.870</CreatedTimestamp>
       <ModifiedTimestamp>2023-10-25.03:47:13.870</ModifiedTimestamp>
       <ObjectId>1205579333</ObjectId>
       <Primary>1</Primary>
       <UnderlyingIndexName>PK_AspNetUserTokens</UnderlyingIndexName>
     </key>
-    <column id="5620" parent="5570" name="Id">
+    <column id="5599" parent="5567" name="UserId">
       <DasType>nvarchar(450 char)|0s</DasType>
       <NotNull>1</NotNull>
       <Position>1</Position>
     </column>
-    <column id="5621" parent="5570" name="UserName">
+    <column id="5600" parent="5567" name="LoginProvider">
+      <DasType>nvarchar(128 char)|0s</DasType>
+      <NotNull>1</NotNull>
+      <Position>2</Position>
+    </column>
+    <column id="5601" parent="5567" name="Name">
+      <DasType>nvarchar(128 char)|0s</DasType>
+      <NotNull>1</NotNull>
+      <Position>3</Position>
+    </column>
+    <column id="5602" parent="5567" name="Value">
+      <DasType>nvarchar(max)|0s</DasType>
+      <Position>4</Position>
+    </column>
+    <foreign-key id="5603" parent="5567" name="FK_AspNetUserTokens_AspNetUsers_UserId">
+      <ColNames>UserId</ColNames>
+      <CreatedTimestamp>2023-10-29.16:47:46.667</CreatedTimestamp>
+      <ModifiedTimestamp>2023-10-29.16:47:46.667</ModifiedTimestamp>
+      <ObjectId>1634104862</ObjectId>
+      <OnDelete>cascade</OnDelete>
+      <RefColNames>Id</RefColNames>
+      <RefTableId>1362103893</RefTableId>
+      <RefTableName>AspNetUsers</RefTableName>
+    </foreign-key>
+    <index id="5604" parent="5567" name="PK_AspNetUserTokens">
+      <Clustering>1</Clustering>
+      <ColNames>UserId
+LoginProvider
+Name</ColNames>
+      <Position>1</Position>
+      <Unique>1</Unique>
+    </index>
+    <key id="5605" parent="5567" name="PK_AspNetUserTokens">
+      <CreatedTimestamp>2023-10-29.16:47:46.667</CreatedTimestamp>
+      <ModifiedTimestamp>2023-10-29.16:47:46.667</ModifiedTimestamp>
+      <ObjectId>1618104805</ObjectId>
+      <Primary>1</Primary>
+      <UnderlyingIndexName>PK_AspNetUserTokens</UnderlyingIndexName>
+    </key>
+    <column id="5606" parent="5568" name="Id">
+      <DasType>nvarchar(450 char)|0s</DasType>
+      <NotNull>1</NotNull>
+      <Position>1</Position>
+    </column>
+    <column id="5607" parent="5568" name="UserName">
       <DasType>nvarchar(256 char)|0s</DasType>
       <Position>2</Position>
     </column>
-    <column id="5622" parent="5570" name="NormalizedUserName">
+    <column id="5608" parent="5568" name="NormalizedUserName">
       <DasType>nvarchar(256 char)|0s</DasType>
       <Position>3</Position>
     </column>
-    <column id="5623" parent="5570" name="Email">
+    <column id="5609" parent="5568" name="Email">
       <DasType>nvarchar(256 char)|0s</DasType>
       <Position>4</Position>
     </column>
-    <column id="5624" parent="5570" name="NormalizedEmail">
+    <column id="5610" parent="5568" name="NormalizedEmail">
       <DasType>nvarchar(256 char)|0s</DasType>
       <Position>5</Position>
     </column>
-    <column id="5625" parent="5570" name="EmailConfirmed">
+    <column id="5611" parent="5568" name="EmailConfirmed">
       <DasType>bit|0s</DasType>
       <NotNull>1</NotNull>
       <Position>6</Position>
     </column>
-    <column id="5626" parent="5570" name="PasswordHash">
+    <column id="5612" parent="5568" name="PasswordHash">
       <DasType>nvarchar(max)|0s</DasType>
       <Position>7</Position>
     </column>
-    <column id="5627" parent="5570" name="SecurityStamp">
+    <column id="5613" parent="5568" name="SecurityStamp">
       <DasType>nvarchar(max)|0s</DasType>
       <Position>8</Position>
     </column>
-    <column id="5628" parent="5570" name="ConcurrencyStamp">
+    <column id="5614" parent="5568" name="ConcurrencyStamp">
       <DasType>nvarchar(max)|0s</DasType>
       <Position>9</Position>
     </column>
-    <column id="5629" parent="5570" name="PhoneNumber">
+    <column id="5615" parent="5568" name="PhoneNumber">
       <DasType>nvarchar(max)|0s</DasType>
       <Position>10</Position>
     </column>
-    <column id="5630" parent="5570" name="PhoneNumberConfirmed">
+    <column id="5616" parent="5568" name="PhoneNumberConfirmed">
       <DasType>bit|0s</DasType>
       <NotNull>1</NotNull>
       <Position>11</Position>
     </column>
-    <column id="5631" parent="5570" name="TwoFactorEnabled">
+    <column id="5617" parent="5568" name="TwoFactorEnabled">
       <DasType>bit|0s</DasType>
       <NotNull>1</NotNull>
       <Position>12</Position>
     </column>
-    <column id="5632" parent="5570" name="LockoutEnd">
+    <column id="5618" parent="5568" name="LockoutEnd">
       <DasType>datetimeoffset|0s</DasType>
       <Position>13</Position>
     </column>
-    <column id="5633" parent="5570" name="LockoutEnabled">
+    <column id="5619" parent="5568" name="LockoutEnabled">
       <DasType>bit|0s</DasType>
       <NotNull>1</NotNull>
       <Position>14</Position>
     </column>
-    <column id="5634" parent="5570" name="AccessFailedCount">
+    <column id="5620" parent="5568" name="AccessFailedCount">
       <DasType>int|0s</DasType>
       <NotNull>1</NotNull>
       <Position>15</Position>
     </column>
-    <index id="5635" parent="5570" name="PK_AspNetUsers">
+    <index id="5621" parent="5568" name="PK_AspNetUsers">
       <Clustering>1</Clustering>
       <ColNames>Id</ColNames>
       <Position>1</Position>
       <Unique>1</Unique>
     </index>
-    <index id="5636" parent="5570" name="EmailIndex">
+    <index id="5622" parent="5568" name="EmailIndex">
       <ColNames>NormalizedEmail</ColNames>
       <Position>2</Position>
     </index>
-    <index id="5637" parent="5570" name="UserNameIndex">
+    <index id="5623" parent="5568" name="UserNameIndex">
       <ColNames>NormalizedUserName</ColNames>
       <Condition>[NormalizedUserName] IS NOT NULL</Condition>
       <Position>3</Position>
       <Unique>1</Unique>
     </index>
-    <key id="5638" parent="5570" name="PK_AspNetUsers">
+    <key id="5624" parent="5568" name="PK_AspNetUsers">
       <CreatedTimestamp>2023-10-25.03:47:13.867</CreatedTimestamp>
       <ModifiedTimestamp>2023-10-25.03:47:13.867</ModifiedTimestamp>
       <ObjectId>965578478</ObjectId>
       <Primary>1</Primary>
       <UnderlyingIndexName>PK_AspNetUsers</UnderlyingIndexName>
     </key>
-    <column id="5639" parent="5571" name="GarageId">
+    <column id="5625" parent="5569" name="Id">
+      <DasType>nvarchar(450 char)|0s</DasType>
+      <NotNull>1</NotNull>
+      <Position>1</Position>
+    </column>
+    <column id="5626" parent="5569" name="UserName">
+      <DasType>nvarchar(256 char)|0s</DasType>
+      <Position>2</Position>
+    </column>
+    <column id="5627" parent="5569" name="NormalizedUserName">
+      <DasType>nvarchar(256 char)|0s</DasType>
+      <Position>3</Position>
+    </column>
+    <column id="5628" parent="5569" name="Email">
+      <DasType>nvarchar(256 char)|0s</DasType>
+      <Position>4</Position>
+    </column>
+    <column id="5629" parent="5569" name="NormalizedEmail">
+      <DasType>nvarchar(256 char)|0s</DasType>
+      <Position>5</Position>
+    </column>
+    <column id="5630" parent="5569" name="EmailConfirmed">
+      <DasType>bit|0s</DasType>
+      <NotNull>1</NotNull>
+      <Position>6</Position>
+    </column>
+    <column id="5631" parent="5569" name="PasswordHash">
+      <DasType>nvarchar(max)|0s</DasType>
+      <Position>7</Position>
+    </column>
+    <column id="5632" parent="5569" name="SecurityStamp">
+      <DasType>nvarchar(max)|0s</DasType>
+      <Position>8</Position>
+    </column>
+    <column id="5633" parent="5569" name="ConcurrencyStamp">
+      <DasType>nvarchar(max)|0s</DasType>
+      <Position>9</Position>
+    </column>
+    <column id="5634" parent="5569" name="PhoneNumber">
+      <DasType>nvarchar(max)|0s</DasType>
+      <Position>10</Position>
+    </column>
+    <column id="5635" parent="5569" name="PhoneNumberConfirmed">
+      <DasType>bit|0s</DasType>
+      <NotNull>1</NotNull>
+      <Position>11</Position>
+    </column>
+    <column id="5636" parent="5569" name="TwoFactorEnabled">
+      <DasType>bit|0s</DasType>
+      <NotNull>1</NotNull>
+      <Position>12</Position>
+    </column>
+    <column id="5637" parent="5569" name="LockoutEnd">
+      <DasType>datetimeoffset|0s</DasType>
+      <Position>13</Position>
+    </column>
+    <column id="5638" parent="5569" name="LockoutEnabled">
+      <DasType>bit|0s</DasType>
+      <NotNull>1</NotNull>
+      <Position>14</Position>
+    </column>
+    <column id="5639" parent="5569" name="AccessFailedCount">
+      <DasType>int|0s</DasType>
+      <NotNull>1</NotNull>
+      <Position>15</Position>
+    </column>
+    <index id="5640" parent="5569" name="PK_AspNetUsers">
+      <Clustering>1</Clustering>
+      <ColNames>Id</ColNames>
+      <Position>1</Position>
+      <Unique>1</Unique>
+    </index>
+    <index id="5641" parent="5569" name="EmailIndex">
+      <ColNames>NormalizedEmail</ColNames>
+      <Position>2</Position>
+    </index>
+    <index id="5642" parent="5569" name="UserNameIndex">
+      <ColNames>NormalizedUserName</ColNames>
+      <Condition>[NormalizedUserName] IS NOT NULL</Condition>
+      <Position>3</Position>
+      <Unique>1</Unique>
+    </index>
+    <key id="5643" parent="5569" name="PK_AspNetUsers">
+      <CreatedTimestamp>2023-10-29.16:47:46.663</CreatedTimestamp>
+      <ModifiedTimestamp>2023-10-29.16:47:46.663</ModifiedTimestamp>
+      <ObjectId>1378103950</ObjectId>
+      <Primary>1</Primary>
+      <UnderlyingIndexName>PK_AspNetUsers</UnderlyingIndexName>
+    </key>
+    <column id="5644" parent="5570" name="GarageId">
       <DasType>int|0s</DasType>
       <NotNull>1</NotNull>
       <Position>1</Position>
     </column>
-    <column id="5640" parent="5571" name="SpecializationId">
+    <column id="5645" parent="5570" name="SpecializationId">
       <DasType>uniqueidentifier|0s</DasType>
       <NotNull>1</NotNull>
       <Position>2</Position>
     </column>
-    <foreign-key id="5641" parent="5571" name="FK_GarageSpecializations_Garages_GarageId">
+    <foreign-key id="5646" parent="5570" name="FK_GarageSpecializations_Garages_GarageId">
       <ColNames>GarageId</ColNames>
       <CreatedTimestamp>2023-10-27.23:23:45.647</CreatedTimestamp>
       <ModifiedTimestamp>2023-10-27.23:23:45.647</ModifiedTimestamp>
@@ -17239,7 +17237,7 @@ Name</ColNames>
       <RefTableId>1237579447</RefTableId>
       <RefTableName>Garages</RefTableName>
     </foreign-key>
-    <foreign-key id="5642" parent="5571" name="FK_GarageSpecializations_Specialization_SpecializationId">
+    <foreign-key id="5647" parent="5570" name="FK_GarageSpecializations_Specialization_SpecializationId">
       <ColNames>SpecializationId</ColNames>
       <CreatedTimestamp>2023-10-27.23:23:45.647</CreatedTimestamp>
       <ModifiedTimestamp>2023-10-27.23:23:45.647</ModifiedTimestamp>
@@ -17249,104 +17247,272 @@ Name</ColNames>
       <RefTableId>1845581613</RefTableId>
       <RefTableName>Specialization</RefTableName>
     </foreign-key>
-    <index id="5643" parent="5571" name="PK_GarageSpecializations">
+    <index id="5648" parent="5570" name="PK_GarageSpecializations">
       <Clustering>1</Clustering>
       <ColNames>GarageId
 SpecializationId</ColNames>
       <Position>1</Position>
       <Unique>1</Unique>
     </index>
-    <index id="5644" parent="5571" name="IX_GarageSpecializations_SpecializationId">
+    <index id="5649" parent="5570" name="IX_GarageSpecializations_SpecializationId">
       <ColNames>SpecializationId</ColNames>
       <Position>2</Position>
     </index>
-    <key id="5645" parent="5571" name="PK_GarageSpecializations">
+    <key id="5650" parent="5570" name="PK_GarageSpecializations">
       <CreatedTimestamp>2023-10-27.23:23:45.647</CreatedTimestamp>
       <ModifiedTimestamp>2023-10-27.23:23:45.647</ModifiedTimestamp>
       <ObjectId>1893581784</ObjectId>
       <Primary>1</Primary>
       <UnderlyingIndexName>PK_GarageSpecializations</UnderlyingIndexName>
     </key>
-    <column id="5646" parent="5572" name="Id">
+    <column id="5651" parent="5571" name="GarageId">
       <DasType>int|0s</DasType>
       <NotNull>1</NotNull>
       <Position>1</Position>
-      <SequenceIdentity>1(2)</SequenceIdentity>
     </column>
-    <column id="5647" parent="5572" name="Name">
+    <column id="5652" parent="5571" name="SpecializationId">
+      <DasType>uniqueidentifier|0s</DasType>
+      <NotNull>1</NotNull>
+      <Position>2</Position>
+    </column>
+    <foreign-key id="5653" parent="5571" name="FK_GarageSpecializations_Garages_GarageId">
+      <ColNames>GarageId</ColNames>
+      <CreatedTimestamp>2023-10-29.16:47:46.697</CreatedTimestamp>
+      <ModifiedTimestamp>2023-10-29.16:47:46.697</ModifiedTimestamp>
+      <ObjectId>1762105318</ObjectId>
+      <OnDelete>cascade</OnDelete>
+      <RefColNames>Id</RefColNames>
+      <RefTableId>1650104919</RefTableId>
+      <RefTableName>Garages</RefTableName>
+    </foreign-key>
+    <foreign-key id="5654" parent="5571" name="FK_GarageSpecializations_Specialization_SpecializationId">
+      <ColNames>SpecializationId</ColNames>
+      <CreatedTimestamp>2023-10-29.16:47:46.697</CreatedTimestamp>
+      <ModifiedTimestamp>2023-10-29.16:47:46.697</ModifiedTimestamp>
+      <ObjectId>1778105375</ObjectId>
+      <OnDelete>cascade</OnDelete>
+      <RefColNames>Id</RefColNames>
+      <RefTableId>1698105090</RefTableId>
+      <RefTableName>Specialization</RefTableName>
+    </foreign-key>
+    <index id="5655" parent="5571" name="PK_GarageSpecializations">
+      <Clustering>1</Clustering>
+      <ColNames>GarageId
+SpecializationId</ColNames>
+      <Position>1</Position>
+      <Unique>1</Unique>
+    </index>
+    <index id="5656" parent="5571" name="IX_GarageSpecializations_SpecializationId">
+      <ColNames>SpecializationId</ColNames>
+      <Position>2</Position>
+    </index>
+    <key id="5657" parent="5571" name="PK_GarageSpecializations">
+      <CreatedTimestamp>2023-10-29.16:47:46.697</CreatedTimestamp>
+      <ModifiedTimestamp>2023-10-29.16:47:46.697</ModifiedTimestamp>
+      <ObjectId>1746105261</ObjectId>
+      <Primary>1</Primary>
+      <UnderlyingIndexName>PK_GarageSpecializations</UnderlyingIndexName>
+    </key>
+    <column id="5658" parent="5572" name="Id">
+      <DasType>int|0s</DasType>
+      <NotNull>1</NotNull>
+      <Position>1</Position>
+      <SequenceIdentity>1(5)</SequenceIdentity>
+    </column>
+    <column id="5659" parent="5572" name="Name">
       <DasType>nvarchar(max)|0s</DasType>
       <Position>2</Position>
     </column>
-    <column id="5648" parent="5572" name="OwnerId">
+    <column id="5660" parent="5572" name="OwnerId">
       <DasType>uniqueidentifier|0s</DasType>
       <NotNull>1</NotNull>
       <Position>3</Position>
       <DefaultConstraintId>1525580473</DefaultConstraintId>
       <DefaultConstraintName>DF__Garages__OwnerId__5AEE82B9</DefaultConstraintName>
     </column>
-    <default id="5649" parent="5572" name="DF__Garages__OwnerId__5AEE82B9">
+    <column id="5661" parent="5572" name="AwailablePlaces">
+      <DasType>bigint|0s</DasType>
+      <NotNull>1</NotNull>
+      <Position>4</Position>
+      <DefaultConstraintId>18099105</DefaultConstraintId>
+      <DefaultConstraintName>DF__Garages__Awailab__01142BA1</DefaultConstraintName>
+    </column>
+    <column id="5662" parent="5572" name="Description">
+      <DasType>nvarchar(max)|0s</DasType>
+      <Position>5</Position>
+    </column>
+    <default id="5663" parent="5572" name="DF__Garages__OwnerId__5AEE82B9">
       <ColNames>OwnerId</ColNames>
       <DefaultExpression>&apos;00000000-0000-0000-0000-000000000000&apos;</DefaultExpression>
       <ModifiedTimestamp>2023-10-26.02:29:47.743</ModifiedTimestamp>
       <NameSurrogate>1</NameSurrogate>
       <ObjectId>1525580473</ObjectId>
     </default>
-    <index id="5650" parent="5572" name="PK_Garages">
+    <default id="5664" parent="5572" name="DF__Garages__Awailab__01142BA1">
+      <ColNames>AwailablePlaces</ColNames>
+      <DefaultExpression>CONVERT([bigint],0)</DefaultExpression>
+      <ModifiedTimestamp>2023-10-29.00:33:40.423</ModifiedTimestamp>
+      <NameSurrogate>1</NameSurrogate>
+      <ObjectId>18099105</ObjectId>
+    </default>
+    <index id="5665" parent="5572" name="PK_Garages">
       <Clustering>1</Clustering>
       <ColNames>Id</ColNames>
       <Position>1</Position>
       <Unique>1</Unique>
     </index>
-    <key id="5651" parent="5572" name="PK_Garages">
+    <key id="5666" parent="5572" name="PK_Garages">
       <CreatedTimestamp>2023-10-25.03:47:13.880</CreatedTimestamp>
       <ModifiedTimestamp>2023-10-25.03:47:13.880</ModifiedTimestamp>
       <ObjectId>1253579504</ObjectId>
       <Primary>1</Primary>
       <UnderlyingIndexName>PK_Garages</UnderlyingIndexName>
     </key>
-    <column id="5652" parent="5573" name="Id">
-      <DasType>uniqueidentifier|0s</DasType>
+    <column id="5667" parent="5573" name="Id">
+      <DasType>int|0s</DasType>
       <NotNull>1</NotNull>
       <Position>1</Position>
+      <SequenceIdentity>1</SequenceIdentity>
     </column>
-    <column id="5653" parent="5573" name="Name">
+    <column id="5668" parent="5573" name="Name">
       <DasType>nvarchar(max)|0s</DasType>
-      <NotNull>1</NotNull>
       <Position>2</Position>
     </column>
-    <index id="5654" parent="5573" name="PK_Specialization">
+    <column id="5669" parent="5573" name="OwnerId">
+      <DasType>uniqueidentifier|0s</DasType>
+      <NotNull>1</NotNull>
+      <Position>3</Position>
+      <DefaultConstraintId>1682105033</DefaultConstraintId>
+      <DefaultConstraintName>DF__Garages__OwnerId__6442E2C9</DefaultConstraintName>
+    </column>
+    <column id="5670" parent="5573" name="AwailablePlaces">
+      <DasType>bigint|0s</DasType>
+      <NotNull>1</NotNull>
+      <Position>4</Position>
+      <DefaultConstraintId>1794105432</DefaultConstraintId>
+      <DefaultConstraintName>DF__Garages__Awailab__6AEFE058</DefaultConstraintName>
+    </column>
+    <column id="5671" parent="5573" name="Description">
+      <DasType>nvarchar(max)|0s</DasType>
+      <Position>5</Position>
+    </column>
+    <default id="5672" parent="5573" name="DF__Garages__OwnerId__6442E2C9">
+      <ColNames>OwnerId</ColNames>
+      <DefaultExpression>&apos;00000000-0000-0000-0000-000000000000&apos;</DefaultExpression>
+      <ModifiedTimestamp>2023-10-29.16:47:46.690</ModifiedTimestamp>
+      <NameSurrogate>1</NameSurrogate>
+      <ObjectId>1682105033</ObjectId>
+    </default>
+    <default id="5673" parent="5573" name="DF__Garages__Awailab__6AEFE058">
+      <ColNames>AwailablePlaces</ColNames>
+      <DefaultExpression>CONVERT([bigint],0)</DefaultExpression>
+      <ModifiedTimestamp>2023-10-29.16:47:46.703</ModifiedTimestamp>
+      <NameSurrogate>1</NameSurrogate>
+      <ObjectId>1794105432</ObjectId>
+    </default>
+    <index id="5674" parent="5573" name="PK_Garages">
       <Clustering>1</Clustering>
       <ColNames>Id</ColNames>
       <Position>1</Position>
       <Unique>1</Unique>
     </index>
-    <key id="5655" parent="5573" name="PK_Specialization">
+    <key id="5675" parent="5573" name="PK_Garages">
+      <CreatedTimestamp>2023-10-29.16:47:46.677</CreatedTimestamp>
+      <ModifiedTimestamp>2023-10-29.16:47:46.677</ModifiedTimestamp>
+      <ObjectId>1666104976</ObjectId>
+      <Primary>1</Primary>
+      <UnderlyingIndexName>PK_Garages</UnderlyingIndexName>
+    </key>
+    <column id="5676" parent="5574" name="Id">
+      <DasType>uniqueidentifier|0s</DasType>
+      <NotNull>1</NotNull>
+      <Position>1</Position>
+    </column>
+    <column id="5677" parent="5574" name="Name">
+      <DasType>nvarchar(max)|0s</DasType>
+      <NotNull>1</NotNull>
+      <Position>2</Position>
+    </column>
+    <index id="5678" parent="5574" name="PK_Specialization">
+      <Clustering>1</Clustering>
+      <ColNames>Id</ColNames>
+      <Position>1</Position>
+      <Unique>1</Unique>
+    </index>
+    <key id="5679" parent="5574" name="PK_Specialization">
       <CreatedTimestamp>2023-10-27.23:23:45.643</CreatedTimestamp>
       <ModifiedTimestamp>2023-10-27.23:23:45.643</ModifiedTimestamp>
       <ObjectId>1861581670</ObjectId>
+      <Outdated>1</Outdated>
       <Primary>1</Primary>
       <UnderlyingIndexName>PK_Specialization</UnderlyingIndexName>
     </key>
-    <column id="5656" parent="5574" name="MigrationId">
+    <column id="5680" parent="5575" name="Id">
+      <DasType>uniqueidentifier|0s</DasType>
+      <NotNull>1</NotNull>
+      <Position>1</Position>
+    </column>
+    <column id="5681" parent="5575" name="Name">
+      <DasType>nvarchar(max)|0s</DasType>
+      <NotNull>1</NotNull>
+      <Position>2</Position>
+    </column>
+    <index id="5682" parent="5575" name="PK_Specialization">
+      <Clustering>1</Clustering>
+      <ColNames>Id</ColNames>
+      <Position>1</Position>
+      <Unique>1</Unique>
+    </index>
+    <key id="5683" parent="5575" name="PK_Specialization">
+      <CreatedTimestamp>2023-10-29.16:47:46.697</CreatedTimestamp>
+      <ModifiedTimestamp>2023-10-29.16:47:46.697</ModifiedTimestamp>
+      <ObjectId>1714105147</ObjectId>
+      <Primary>1</Primary>
+      <UnderlyingIndexName>PK_Specialization</UnderlyingIndexName>
+    </key>
+    <column id="5684" parent="5576" name="MigrationId">
       <DasType>nvarchar(150 char)|0s</DasType>
       <NotNull>1</NotNull>
       <Position>1</Position>
     </column>
-    <column id="5657" parent="5574" name="ProductVersion">
+    <column id="5685" parent="5576" name="ProductVersion">
       <DasType>nvarchar(32 char)|0s</DasType>
       <NotNull>1</NotNull>
       <Position>2</Position>
     </column>
-    <index id="5658" parent="5574" name="PK___EFMigrationsHistory">
+    <index id="5686" parent="5576" name="PK___EFMigrationsHistory">
       <Clustering>1</Clustering>
       <ColNames>MigrationId</ColNames>
       <Position>1</Position>
       <Unique>1</Unique>
     </index>
-    <key id="5659" parent="5574" name="PK___EFMigrationsHistory">
-      <CreatedTimestamp>2023-10-25.03:47:13.830</CreatedTimestamp>
-      <ModifiedTimestamp>2023-10-25.03:47:13.830</ModifiedTimestamp>
-      <ObjectId>901578250</ObjectId>
+    <key id="5687" parent="5576" name="PK___EFMigrationsHistory">
+      <CreatedTimestamp>2023-10-29.16:41:42.520</CreatedTimestamp>
+      <ModifiedTimestamp>2023-10-29.16:41:42.520</ModifiedTimestamp>
+      <ObjectId>674101442</ObjectId>
+      <Primary>1</Primary>
+      <UnderlyingIndexName>PK___EFMigrationsHistory</UnderlyingIndexName>
+    </key>
+    <column id="5688" parent="5577" name="MigrationId">
+      <DasType>nvarchar(150 char)|0s</DasType>
+      <NotNull>1</NotNull>
+      <Position>1</Position>
+    </column>
+    <column id="5689" parent="5577" name="ProductVersion">
+      <DasType>nvarchar(32 char)|0s</DasType>
+      <NotNull>1</NotNull>
+      <Position>2</Position>
+    </column>
+    <index id="5690" parent="5577" name="PK___EFMigrationsHistory">
+      <Clustering>1</Clustering>
+      <ColNames>MigrationId</ColNames>
+      <Position>1</Position>
+      <Unique>1</Unique>
+    </index>
+    <key id="5691" parent="5577" name="PK___EFMigrationsHistory">
+      <CreatedTimestamp>2023-10-29.16:47:46.637</CreatedTimestamp>
+      <ModifiedTimestamp>2023-10-29.16:47:46.637</ModifiedTimestamp>
+      <ObjectId>1314103722</ObjectId>
       <Primary>1</Primary>
       <UnderlyingIndexName>PK___EFMigrationsHistory</UnderlyingIndexName>
     </key>
