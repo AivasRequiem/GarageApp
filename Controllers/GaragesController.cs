@@ -10,6 +10,7 @@ using GarageApp.Models;
 using Microsoft.AspNetCore.Authorization;
 using System.Data;
 using System.Security.Claims;
+using Microsoft.IdentityModel.Tokens;
 
 namespace GarageApp.Controllers
 {
@@ -74,8 +75,13 @@ namespace GarageApp.Controllers
                 return NotFound();
             }
 
-            var garage = await _context.Garages
-                .FirstOrDefaultAsync(m => m.Id == id);
+            ViewBag.Specialization = _context.Specialization.ToList();
+
+            Garage garage = await _context.Garages
+                .Include(g => g.GarageSpecializations)
+                .ThenInclude(gs => gs.Specialization)
+                .FirstOrDefaultAsync(g => g.Id == id);
+
             if (garage == null)
             {
                 return NotFound();
@@ -124,7 +130,7 @@ namespace GarageApp.Controllers
         {
             if (_context.Garages.Any(g => g.Name == garage.Name))
             {
-                return Problem("Garage with same name exists");
+                return View(new ErrorViewModel { RequestId = "Garage with same name exists" });
             }
             garage.OwnerId = new Guid(User.FindFirstValue(ClaimTypes.NameIdentifier));
 
@@ -136,6 +142,7 @@ namespace GarageApp.Controllers
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
+            ViewBag.Specialization = _context.Specialization.ToList();
             return View(garage);
         }
 
@@ -172,7 +179,7 @@ namespace GarageApp.Controllers
         {
             if (id != garage.Id)
             {
-                return NotFound();
+                return View(new ErrorViewModel { RequestId = $"Garage with ID {id} doesn't exist" });
             }
 
             var existingGarage = _context.Garages
@@ -246,7 +253,7 @@ namespace GarageApp.Controllers
         {
             if (_context.Garages == null)
             {
-                return Problem("Entity set 'ApplicationDbContext.Garages'  is null.");
+                return View(new ErrorViewModel { RequestId = $"Entity set 'ApplicationDbContext.Garages'  is null." });
             }
             var garage = await _context.Garages.FindAsync(id);
             if (garage != null)

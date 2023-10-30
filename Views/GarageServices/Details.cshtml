@@ -1,7 +1,14 @@
 ﻿@model GarageApp.Models.GarageService
 
+@using Microsoft.AspNetCore.Authorization
+@using System.Security.Claims
+
 @{
     ViewData["Title"] = "Details";
+}
+
+@{
+    var userIdClaim = User.FindFirstValue(ClaimTypes.NameIdentifier);
 }
 
 <h1>Details</h1>
@@ -32,12 +39,15 @@
             @Html.DisplayNameFor(model => model.Garage)
         </dt>
         <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Garage.Id)
+            @Html.DisplayFor(model => model.Garage.Name)
         </dd>
     </dl>
 </div>
 <div>
-    <a asp-controller="BookingSlots" asp-action="Create" asp-route-id="@Model?.Id">Book a slot</a> |
-    <a asp-action="Edit" asp-route-id="@Model?.Id">Edit</a> |
-    <a asp-action="Index">Back to List</a>
+	<a asp-controller="BookingSlots" asp-action="Create" asp-route-id="@Model?.Id">Book a slot</a>  <span> | </span>
+    @if (User.IsInRole("Admin") || userIdClaim == Model.Garage.OwnerId.ToString())
+    {
+         <a asp-action="Edit" asp-route-id="@Model?.Id">Edit</a> <span> | </span>
+    }
+    <a asp-controller="Garages" asp-action="Details" asp-route-id="@Model.Garage.Id">Back to Garage</a>
 </div>

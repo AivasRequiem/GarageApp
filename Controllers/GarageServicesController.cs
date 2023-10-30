@@ -10,6 +10,8 @@ using GarageApp.Models;
 using System.ComponentModel.DataAnnotations;
 using Microsoft.IdentityModel.Tokens;
 using static GarageApp.Controllers.GarageServicesController;
+using Microsoft.AspNetCore.Authorization;
+using System.Data;
 
 namespace GarageApp.Controllers
 {
@@ -49,6 +51,7 @@ namespace GarageApp.Controllers
         }
 
         // GET: GarageServices/Create/id
+        [Authorize(Roles = "Admin,garageOwner")]
         public IActionResult Create(int id)
         {
             ViewData["GarageId"] = id;
@@ -61,7 +64,7 @@ namespace GarageApp.Controllers
 
             if (specializations.IsNullOrEmpty())
             {
-                return Problem("Add specializations to Gatage");
+                return View(new ErrorViewModel { RequestId = $"Add specializations to Gatage" });
             }
 
             ViewBag.Specializations = new SelectList(specializations, "Id", "Name");
@@ -83,6 +86,7 @@ namespace GarageApp.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Admin,garageOwner")]
         public async Task<IActionResult> Create(int id, [Bind("Name,Description,Price,SpecializationId")] GarageServiceFromForm garageService)
         {            
             if (ModelState.IsValid)
@@ -106,6 +110,7 @@ namespace GarageApp.Controllers
         }
 
         // GET: GarageServices/Edit/5
+        [Authorize(Roles = "Admin,garageOwner")]
         public async Task<IActionResult> Edit(Guid? id)
         {
             if (id == null || _context.GarageService == null)
@@ -127,12 +132,13 @@ namespace GarageApp.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Admin,garageOwner")]
         //change here to GarageServiceForm
         public async Task<IActionResult> Edit(Guid id, [Bind("Id,Name,Description,Price,GarageId")] GarageService garageService)
         {
             if (id != garageService.Id)
             {
-                return NotFound();
+                return View(new ErrorViewModel { RequestId = $"Garage service with ID {id} doesn't exist." });
             }
 
             if (ModelState.IsValid)
@@ -160,6 +166,7 @@ namespace GarageApp.Controllers
         }
 
         // GET: GarageServices/Delete/5
+        [Authorize(Roles = "Admin,garageOwner")]
         public async Task<IActionResult> Delete(Guid? id)
         {
             if (id == null || _context.GarageService == null)
@@ -181,6 +188,7 @@ namespace GarageApp.Controllers
         // POST: GarageServices/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Admin,garageOwner")]
         public async Task<IActionResult> DeleteConfirmed(Guid id)
         {
             if (_context.GarageService == null)
