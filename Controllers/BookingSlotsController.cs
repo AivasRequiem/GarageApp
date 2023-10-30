@@ -8,6 +8,7 @@ using Microsoft.EntityFrameworkCore;
 using GarageApp.Data;
 using GarageApp.Models;
 using System.Security.Claims;
+using Microsoft.AspNetCore.Authorization;
 
 namespace GarageApp.Controllers
 {
@@ -58,6 +59,7 @@ namespace GarageApp.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize]
         public async Task<IActionResult> Create(string? id, [Bind("Date,Description")] BookingSlot bookingSlot)
         {
             if (id == null)
