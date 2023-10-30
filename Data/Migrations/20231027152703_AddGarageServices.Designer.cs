@@ -4,6 +4,7 @@ using GarageApp.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,41 +12,18 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace GarageApp.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20231027152703_AddGarageServices")]
+    partial class AddGarageServices
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "7.0.13")
+                .HasAnnotation("ProductVersion", "7.0.12")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
-
-            modelBuilder.Entity("GarageApp.Models.BookingSlot", b =>
-                {
-                    b.Property<Guid>("GarageServiceId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<DateTime>("Date")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("Description")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<Guid>("Id")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<bool>("IsConfirmed")
-                        .HasColumnType("bit");
-
-                    b.Property<Guid?>("UserId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.HasKey("GarageServiceId", "Date");
-
-                    b.ToTable("BookingSlot");
-                });
 
             modelBuilder.Entity("GarageApp.Models.Garage", b =>
                 {
@@ -78,7 +56,7 @@ namespace GarageApp.Data.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<string>("Description")
+                    b.Property<string>("Descripion")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("GarageId")
@@ -91,14 +69,9 @@ namespace GarageApp.Data.Migrations
                     b.Property<decimal?>("Price")
                         .HasColumnType("decimal(18,2)");
 
-                    b.Property<Guid>("SpecializationId")
-                        .HasColumnType("uniqueidentifier");
-
                     b.HasKey("Id");
 
                     b.HasIndex("GarageId");
-
-                    b.HasIndex("SpecializationId");
 
                     b.ToTable("GarageService");
                 });
@@ -335,17 +308,6 @@ namespace GarageApp.Data.Migrations
                     b.ToTable("AspNetUserTokens", (string)null);
                 });
 
-            modelBuilder.Entity("GarageApp.Models.BookingSlot", b =>
-                {
-                    b.HasOne("GarageApp.Models.GarageService", "GarageService")
-                        .WithMany()
-                        .HasForeignKey("GarageServiceId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("GarageService");
-                });
-
             modelBuilder.Entity("GarageApp.Models.GarageService", b =>
                 {
                     b.HasOne("GarageApp.Models.Garage", "Garage")
@@ -354,15 +316,7 @@ namespace GarageApp.Data.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("GarageApp.Models.Specialization", "Specialization")
-                        .WithMany()
-                        .HasForeignKey("SpecializationId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
                     b.Navigation("Garage");
-
-                    b.Navigation("Specialization");
                 });
 
             modelBuilder.Entity("GarageApp.Models.GarageSpecializations", b =>

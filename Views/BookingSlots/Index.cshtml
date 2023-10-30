@@ -1,0 +1,60 @@
+﻿@using System.Security.Claims;
+@model IEnumerable<GarageApp.Models.BookingSlot>
+
+@{
+    ViewData["Title"] = "Index";
+    
+    Guid userId = new Guid(User.FindFirstValue(ClaimTypes.NameIdentifier)!);
+    
+}
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.GarageService)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Date)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Description)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.IsConfirmed)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.GarageService!.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Date)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Description)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.IsConfirmed)
+            </td>
+            <td>
+                @if ((User.IsInRole("Admin") ||
+                     userId == item.GarageService!.Garage.OwnerId) &&
+                     !item.IsConfirmed)
+                {
+                    <a asp-action="Confirm" asp-route-id="@item.Id">Confirm</a> <span> | </span>
+                    <a asp-action="Delete" asp-route-id="@item.Id">Reject</a>
+                }
+                else
+                {
+                    <a asp-action="Delete" asp-route-id="@item.Id">Delete</a> <span> | </span>
+                }
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

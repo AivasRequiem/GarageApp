@@ -17,6 +17,15 @@
             @Html.DisplayFor(model => model.Name)
         </dd>
     </dl>
+    <tabale>
+        @foreach (var Service in ViewBag.GarageServices)
+        {
+        <div>
+            <a asp-controller="GarageServices" asp-action="Details" asp-route-id="@Service?.Id">@Service.Name</a>
+            <span>@Service.Price</span>
+        </div>
+        }
+    </tabale>
 </div>
 <div>
     <a asp-action="Edit" asp-route-id="@Model?.Id">Edit</a> |
