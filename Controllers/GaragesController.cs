@@ -78,28 +78,6 @@ namespace GarageApp.Controllers
             return View();
         }
 
-        private async void addSpecializationToGarage(Garage garage, string[] GarageSpecializations)
-        {
-            if (GarageSpecializations != null)
-            {
-                foreach (var specialization in GarageSpecializations)
-                {
-                    Guid specializationId;
-                    if (Guid.TryParse(specialization, out specializationId))
-                    {
-                        Specialization spec = await _specializationManagmentService.GetSpecializationById(specializationId);
-
-                        garage.GarageSpecializations.Add(new GarageSpecializations()
-                        {
-                            Garage = garage,
-                            Specialization = spec,
-                            SpecializationId = specializationId
-                        });
-                    }
-                }
-            }
-        }
-
         // POST: Garages/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
@@ -120,7 +98,9 @@ namespace GarageApp.Controllers
 
                 return RedirectToAction(nameof(Index));
             }
+
             ViewBag.Specialization = await _specializationManagmentService.GetAllSpecializations();
+
             return View(garage);
         }
 
@@ -133,14 +113,15 @@ namespace GarageApp.Controllers
                 return NotFound();
             }
 
-            ViewBag.Specialization = await _specializationManagmentService.GetAllSpecializations();
-
             Garage garage = await _garageManagmentService.GetGarage(id);
 
             if (garage == null)
             {
                 return NotFound();
             }
+
+            ViewBag.Specialization = await _specializationManagmentService.GetAllSpecializations();
+
             return View(garage);
         }
 
