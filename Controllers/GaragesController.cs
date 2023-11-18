@@ -57,8 +57,6 @@ namespace GarageApp.Controllers
                 return NotFound();
             }
 
-            ViewBag.Specialization = await _specializationManagmentService.GetAllSpecializations();
-
             Garage garage = await _garageManagmentService.GetGarage(id);
 
             if (garage == null)
@@ -67,6 +65,8 @@ namespace GarageApp.Controllers
             }
 
             ViewBag.GarageServices = await _garageServicesManagmentService.GetGarageServicesByGarageId(id);
+            ViewBag.Specialization = await _specializationManagmentService.GetAllSpecializations();
+
             return View(garage);
         }
 
