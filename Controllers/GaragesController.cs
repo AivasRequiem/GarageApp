@@ -11,60 +11,42 @@ using Microsoft.AspNetCore.Authorization;
 using System.Data;
 using System.Security.Claims;
 using Microsoft.IdentityModel.Tokens;
+using GarageApp.Services;
 
 namespace GarageApp.Controllers
 {
     public class GaragesController : Controller
     {
         private readonly ApplicationDbContext _context;
+        private readonly GarageManagmentService _garageManagmentService;
+        private readonly SpecializationManagmentService _specializationManagmentService;
+        private readonly GarageServicesManagmentService _garageServicesManagmentService;
 
         public GaragesController(ApplicationDbContext context)
         {
             _context = context;
+            _garageManagmentService = new GarageManagmentService(context);
+            _specializationManagmentService = new SpecializationManagmentService(context);
+            _garageServicesManagmentService = new GarageServicesManagmentService(context);
         }
 
         // GET: Garages
         public async Task<IActionResult> Index(string garageSpecialization, string searchString)
         {
-            if (_context.Garages == null)
+            try
             {
-                return Problem("Entity set 'MvcMovieContext.Garages'  is null.");
+                return View(await _garageManagmentService.GetGaragesBySpecialization(garageSpecialization, searchString));
             }
-
-            if (_context.Specialization == null)
+            catch(Exception ex)
             {
-                return Problem("Entity set 'MvcMovieContext.Garages'  is null.");
+                return View(new ErrorViewModel { RequestId = ex.Message });
             }
-
-            IQueryable<string> specializations = from spec in _context.Specialization
-                                                 select spec.Name;
-
-            IQueryable<Garage> garages = from garage in _context.Garages
-                                         select garage;
-
-            if (!string.IsNullOrEmpty(searchString))
-            {
-                garages = garages.Where(garage => garage.Name!.Contains(searchString));
-            }
-
-            if (!string.IsNullOrEmpty(garageSpecialization))
-            {
-                garages = garages.Where(g => g.GarageSpecializations != null && g.GarageSpecializations.Any(spec => spec.Specialization.Name == garageSpecialization));
-            }
-
-            var garageSpecializationsView = new GarageSpecializationsViewModel
-            {
-                Specializations = new SelectList(await specializations.Distinct().ToListAsync()),
-                Garages = await garages.ToListAsync()
-            };
-
-            return View(garageSpecializationsView);
         }
 
         [HttpGet("GetGarages")]
         public async Task<IEnumerable<Garage>> GetGarages()
         {
-            return await _context.Garages.ToListAsync();
+            return await _garageManagmentService.GetAllGarages();
         }
 
         // GET: Garages/Details/5
@@ -75,31 +57,28 @@ namespace GarageApp.Controllers
                 return NotFound();
             }
 
-            ViewBag.Specialization = _context.Specialization.ToList();
+            ViewBag.Specialization = await _specializationManagmentService.GetAllSpecializations();
 
-            Garage garage = await _context.Garages
-                .Include(g => g.GarageSpecializations)
-                .ThenInclude(gs => gs.Specialization)
-                .FirstOrDefaultAsync(g => g.Id == id);
+            Garage garage = await _garageManagmentService.GetGarage(id);
 
             if (garage == null)
             {
                 return NotFound();
             }
 
-            ViewBag.GarageServices = await _context.GarageService.Where(elem => elem.GarageId == id).ToListAsync();
+            ViewBag.GarageServices = await _garageServicesManagmentService.GetGarageServicesByGarageId(id);
             return View(garage);
         }
 
         // GET: Garages/Create
         [Authorize(Roles = "Admin,garageOwner")]
-        public IActionResult Create()
+        public async Task<IActionResult> Create()
         {
-            ViewBag.Specialization = _context.Specialization.ToList();
+            ViewBag.Specialization = await _specializationManagmentService.GetAllSpecializations();
             return View();
         }
 
-        private void addSpecializationToGarage(Garage garage, string[] GarageSpecializations)
+        private async void addSpecializationToGarage(Garage garage, string[] GarageSpecializations)
         {
             if (GarageSpecializations != null)
             {
@@ -108,7 +87,8 @@ namespace GarageApp.Controllers
                     Guid specializationId;
                     if (Guid.TryParse(specialization, out specializationId))
                     {
-                        var spec = _context.Specialization.First(elem => elem.Id == specializationId);
+                        Specialization spec = await _specializationManagmentService.GetSpecializationById(specializationId);
+
                         garage.GarageSpecializations.Add(new GarageSpecializations()
                         {
                             Garage = garage,
@@ -128,7 +108,7 @@ namespace GarageApp.Controllers
         [Authorize(Roles = "Admin,garageOwner")]
         public async Task<IActionResult> Create(Garage garage, string[] GarageSpecializations)
         {
-            if (_context.Garages.Any(g => g.Name == garage.Name))
+            if (_garageManagmentService.IsExistGarage(garage))
             {
                 return View(new ErrorViewModel { RequestId = "Garage with same name exists" });
             }
@@ -142,7 +122,7 @@ namespace GarageApp.Controllers
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            ViewBag.Specialization = _context.Specialization.ToList();
+            ViewBag.Specialization = await _specializationManagmentService.GetAllSpecializations();
             return View(garage);
         }
 
@@ -155,12 +135,9 @@ namespace GarageApp.Controllers
                 return NotFound();
             }
 
-            ViewBag.Specialization = _context.Specialization.ToList();
+            ViewBag.Specialization = await _specializationManagmentService.GetAllSpecializations();
 
-            Garage garage = _context.Garages
-                .Include(g => g.GarageSpecializations)
-                .ThenInclude(gs => gs.Specialization)
-                .FirstOrDefault(g => g.Id == id);
+            Garage garage = await _garageManagmentService.GetGarage(id);
 
             if (garage == null)
             {
@@ -182,9 +159,7 @@ namespace GarageApp.Controllers
                 return View(new ErrorViewModel { RequestId = $"Garage with ID {id} doesn't exist" });
             }
 
-            var existingGarage = _context.Garages
-                        .Include(g => g.GarageSpecializations)
-                        .FirstOrDefault(g => g.Id == id);
+            Garage existingGarage = await _garageManagmentService.GetGarage(id); ;
 
             if (ModelState.IsValid)
             {
@@ -235,8 +210,8 @@ namespace GarageApp.Controllers
                 return NotFound();
             }
 
-            var garage = await _context.Garages
-                .FirstOrDefaultAsync(m => m.Id == id);
+            Garage garage = await _garageManagmentService.GetGarage(id);
+
             if (garage == null)
             {
                 return NotFound();
@@ -251,17 +226,14 @@ namespace GarageApp.Controllers
         [Authorize(Roles = "Admin,garageOwner")]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            if (_context.Garages == null)
+            try
             {
-                return View(new ErrorViewModel { RequestId = $"Entity set 'ApplicationDbContext.Garages'  is null." });
+                _garageManagmentService.DeleteGarage(id);
             }
-            var garage = await _context.Garages.FindAsync(id);
-            if (garage != null)
+            catch(Exception ex)
             {
-                _context.Garages.Remove(garage);
+                return View(new ErrorViewModel { RequestId = ex.Message });
             }
-            
-            await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
