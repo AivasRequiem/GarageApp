@@ -161,6 +161,9 @@ namespace GarageApp.Services
                 return false;
             }
         }
-
-    }
+        public Boolean IsAnyGarages()
+        {
+            return _context.Garages == null;
+        }
+    }    
 }

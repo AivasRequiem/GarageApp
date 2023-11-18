@@ -17,14 +17,12 @@ namespace GarageApp.Controllers
 {
     public class GaragesController : Controller
     {
-        private readonly ApplicationDbContext _context;
         private readonly GarageManagmentService _garageManagmentService;
         private readonly SpecializationManagmentService _specializationManagmentService;
         private readonly GarageServicesManagmentService _garageServicesManagmentService;
 
         public GaragesController(ApplicationDbContext context)
         {
-            _context = context;
             _garageManagmentService = new GarageManagmentService(context);
             _specializationManagmentService = new SpecializationManagmentService(context);
             _garageServicesManagmentService = new GarageServicesManagmentService(context);
@@ -52,7 +50,7 @@ namespace GarageApp.Controllers
         // GET: Garages/Details/5
         public async Task<IActionResult> Details(int? id)
         {
-            if (id == null || _context.Garages == null)
+            if (id == null || _garageManagmentService.IsAnyGarages())
             {
                 return NotFound();
             }
@@ -108,7 +106,7 @@ namespace GarageApp.Controllers
         [Authorize(Roles = "Admin,garageOwner")]
         public async Task<IActionResult> Edit(int? id)
         {
-            if (id == null || _context.Garages == null)
+            if (id == null || _garageManagmentService.IsAnyGarages())
             {
                 return NotFound();
             }
@@ -152,7 +150,7 @@ namespace GarageApp.Controllers
         [Authorize(Roles = "Admin,garageOwner")]
         public async Task<IActionResult> Delete(int? id)
         {
-            if (id == null || _context.Garages == null)
+            if (id == null || _garageManagmentService.IsAnyGarages())
             {
                 return NotFound();
             }
