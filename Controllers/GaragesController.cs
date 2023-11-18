@@ -111,15 +111,13 @@ namespace GarageApp.Controllers
             if (_garageManagmentService.IsExistGarage(garage))
             {
                 return View(new ErrorViewModel { RequestId = "Garage with same name exists" });
-            }
-            garage.OwnerId = new Guid(User.FindFirstValue(ClaimTypes.NameIdentifier));
-
-            addSpecializationToGarage(garage, GarageSpecializations);
+            }            
 
             if (ModelState.IsValid)
             {
-                _context.Add(garage);
-                await _context.SaveChangesAsync();
+                await _garageManagmentService.CreateGarage(garage, GarageSpecializations,
+                                new Guid(User.FindFirstValue(ClaimTypes.NameIdentifier)));
+
                 return RedirectToAction(nameof(Index));
             }
             ViewBag.Specialization = await _specializationManagmentService.GetAllSpecializations();
@@ -159,43 +157,11 @@ namespace GarageApp.Controllers
                 return View(new ErrorViewModel { RequestId = $"Garage with ID {id} doesn't exist" });
             }
 
-            Garage existingGarage = await _garageManagmentService.GetGarage(id); ;
+            Garage existingGarage = await _garageManagmentService.GetGarage(id);
 
             if (ModelState.IsValid)
             {
-                if (GarageSpecializations != null)
-                {
-
-                    existingGarage.Name = garage.Name;
-                    existingGarage.OwnerId = garage.OwnerId;
-
-                    if (existingGarage.GarageSpecializations != null)
-                    {
-                        existingGarage.GarageSpecializations.Clear();
-                    }
-                    else
-                    {
-                        existingGarage.GarageSpecializations = new List<GarageSpecializations>();
-                    }
-                    
-                    addSpecializationToGarage(existingGarage, GarageSpecializations);
-                }
-                try
-                {
-                    _context.Update(existingGarage);
-                    await _context.SaveChangesAsync();
-                }
-                catch (DbUpdateConcurrencyException)
-                {
-                    if (!GarageExists(existingGarage.Id))
-                    {
-                        return NotFound();
-                    }
-                    else
-                    {
-                        throw;
-                    }
-                }
+                await _garageManagmentService.EditGarage(existingGarage, garage, GarageSpecializations);
                 return RedirectToAction(nameof(Index));
             }
             return View(existingGarage);
@@ -235,11 +201,6 @@ namespace GarageApp.Controllers
                 return View(new ErrorViewModel { RequestId = ex.Message });
             }
             return RedirectToAction(nameof(Index));
-        }
-
-        private bool GarageExists(int id)
-        {
-          return (_context.Garages?.Any(e => e.Id == id)).GetValueOrDefault();
         }
     }
 }

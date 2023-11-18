@@ -108,25 +108,58 @@ namespace GarageApp.Services
             }
         }
 
-        public Garage CreateGarage(Garage garage, string[] GarageSpecializations)
+        public async Task<Boolean> CreateGarage(Garage garage, string[] GarageSpecializations, Guid OwnerId)
         {
-            //if (_context.Garages.Any(g => g.Name == garage.Name))
-            //{
-            //    return View(new ErrorViewModel { RequestId = "Garage with same name exists" });
-            //}
-            //garage.OwnerId = new Guid(User.FindFirstValue(ClaimTypes.NameIdentifier));
+            try
+            {           
+                addSpecializationToGarage(garage, GarageSpecializations);
+                garage.OwnerId = OwnerId;
+                _context.Add(garage);
+                await _context.SaveChangesAsync();
+                return true;
+            }
+            catch
+            {
+                return false;
+            }
+        }
 
-            //addSpecializationToGarage(garage, GarageSpecializations);
+        public async Task<Boolean> EditGarage(Garage existingGarage, Garage garage, string[] GarageSpecializations)
+        {
+            try
+            {
+                if (GarageSpecializations != null)
+                {
 
-            //if (ModelState.IsValid)
-            //{
-            //    _context.Add(garage);
-            //    await _context.SaveChangesAsync();
-            //    return RedirectToAction(nameof(Index));
-            //}
-            //ViewBag.Specialization = _context.Specialization.ToList();
+                    existingGarage.Name = garage.Name;
+                    existingGarage.OwnerId = garage.OwnerId;
 
-            return garage;
+                    if (existingGarage.GarageSpecializations != null)
+                    {
+                        existingGarage.GarageSpecializations.Clear();
+                    }
+                    else
+                    {
+                        existingGarage.GarageSpecializations = new List<GarageSpecializations>();
+                    }
+
+                    addSpecializationToGarage(existingGarage, GarageSpecializations);
+                }
+                try
+                {
+                    _context.Update(existingGarage);
+                    await _context.SaveChangesAsync();
+                    return true;
+                }
+                catch (DbUpdateConcurrencyException)
+                {
+                    return false;
+                }
+            }
+            catch
+            {
+                return false;
+            }
         }
 
     }
