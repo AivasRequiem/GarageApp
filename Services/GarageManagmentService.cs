@@ -133,6 +133,8 @@ namespace GarageApp.Services
 
                     existingGarage.Name = garage.Name;
                     existingGarage.OwnerId = garage.OwnerId;
+                    existingGarage.Description = garage.Description;
+                    existingGarage.AwailablePlaces = garage.AwailablePlaces;
 
                     if (existingGarage.GarageSpecializations != null)
                     {
