@@ -9,6 +9,7 @@ using GarageApp.Data;
 using GarageApp.Models;
 using System.Security.Claims;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 
 namespace GarageApp.Controllers
 {
@@ -75,6 +76,10 @@ namespace GarageApp.Controllers
                     return NotFound();
                 }
                 Guid serviceId = new Guid(id);
+                IdentityUser user = _context.Users.FirstOrDefault(x => x.Id == userId);
+                var phoneNumber = user.PhoneNumber;
+                string? userName = User.FindFirstValue(ClaimTypes.Name);
+                bookingSlot.Description += "\n" + userName + " " + phoneNumber;
                 var newSlot = new BookingSlot()
                 {
                     UserId = new Guid(userId),
@@ -91,6 +96,57 @@ namespace GarageApp.Controllers
             }
 
             return View(bookingSlot);
+        }
+
+        // GET: BookingSlots/Create
+        public IActionResult Edit(string? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+            BookingSlot bookingSlot = _context.BookingSlot.FirstOrDefault(x => x.Id.ToString() == id);
+            ViewData["GarageServiceId"] = id;
+            return View(bookingSlot);
+        }
+        
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        [Authorize]
+        //change here to GarageServiceForm
+        public async Task<IActionResult> Edit(Guid id, [Bind("Id,Date,Description")] BookingSlot bookingSlot)
+        {
+            if (id != bookingSlot.Id)
+            {
+                return View(new ErrorViewModel { RequestId = $"Booking Slot with ID {id} doesn't match." });
+            }
+            
+            string? userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+            if (userId == bookingSlot.UserId.ToString())
+            {
+                return View(new ErrorViewModel { RequestId = $"You have no rights" });
+            }
+            BookingSlot editedBookingSlot = _context.BookingSlot.FirstOrDefault(x => x.Id == id);
+            if (editedBookingSlot != null)
+            {
+                editedBookingSlot.Date = bookingSlot.Date;
+                editedBookingSlot.Description = bookingSlot.Description;
+            }
+
+            if (ModelState.IsValid)
+            {
+                try
+                {
+                    _context.Update(editedBookingSlot);
+                    await _context.SaveChangesAsync();
+                }
+                catch (Exception ex)
+                {
+                    return View(new ErrorViewModel { RequestId = ex.Message });
+                }
+                return RedirectToAction(nameof(Index));
+            }
+            return View(editedBookingSlot);
         }
 
         public async Task<IActionResult> Confirm(Guid? id)

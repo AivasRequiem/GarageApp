@@ -42,6 +42,12 @@
                 @Html.DisplayFor(modelItem => item.IsConfirmed)
             </td>
             <td>
+                @if (userId == item.UserId && !item.IsConfirmed)
+                {
+                    <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> <span> | </span>
+                }
+            </td>
+            <td>
                 @if ((User.IsInRole("Admin") ||
                      userId == item.GarageService!.Garage.OwnerId) &&
                      !item.IsConfirmed)
