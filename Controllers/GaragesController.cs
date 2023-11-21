@@ -121,7 +121,7 @@ namespace GarageApp.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         [Authorize(Roles = "Admin,garageOwner")]
-        public async Task<IActionResult> Edit(int id, Garage garage, string[] GarageSpecializations)
+        public async Task<IActionResult> Edit(int id, Garage garage, string[] garageSpecializations)
         {
             if (id != garage.Id)
             {
@@ -132,7 +132,7 @@ namespace GarageApp.Controllers
 
             if (ModelState.IsValid)
             {
-                await _garageManagmentService.EditGarage(existingGarage, garage, GarageSpecializations);
+                await _garageManagmentService.EditGarage(existingGarage, garage, garageSpecializations);
                 return RedirectToAction(nameof(Index));
             }
             return View(existingGarage);

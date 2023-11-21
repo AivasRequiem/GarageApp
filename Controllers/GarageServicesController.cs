@@ -1,19 +1,15 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
-using Microsoft.EntityFrameworkCore;
 using GarageApp.Data;
 using GarageApp.Models;
 using System.ComponentModel.DataAnnotations;
-using Microsoft.IdentityModel.Tokens;
 using Microsoft.AspNetCore.Authorization;
-using System.Data;
 using GarageApp.Services;
 
 namespace GarageApp.Controllers
 {
     public class GarageServicesController : Controller
     {
-        private readonly ApplicationDbContext _context;
         private readonly GarageServicesManagmentService _garageServicesManagment;
         private readonly GarageManagmentService _garageManagment;
         private readonly SpecializationManagmentService _specializationManagment;
@@ -116,7 +112,6 @@ namespace GarageApp.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         [Authorize(Roles = "Admin,garageOwner")]
-        //change here to GarageServiceForm
         public async Task<IActionResult> Edit(Guid id, [Bind("Id,Name,Description,Price")] GarageService garageService)
         {
             if (id != garageService.Id)
@@ -124,7 +119,6 @@ namespace GarageApp.Controllers
                 return View(new ErrorViewModel { RequestId = $"Garage service with ID {id} doesn't match." });
             }
 
-            //garageService.Garage = await _garageManagment.GetGarage(garageService.GarageId);
             GarageService existingService = await _garageServicesManagment.GetGarageService(id);
 
             if (ModelState.IsValid)
