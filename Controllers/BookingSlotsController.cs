@@ -130,7 +130,11 @@ namespace GarageApp.Controllers
         {
             Guid userId = new Guid(User.FindFirstValue(ClaimTypes.NameIdentifier));
 
-            await _bookingSlotsManagmentService.DeleteBookingSlot(id, userId);
+            var valResult = await _bookingSlotsManagmentService.DeleteBookingSlot(id, userId);
+            if (!valResult.IsValid)
+            {
+                TempData["Error"] = valResult.Errors[0].ErrorMessage;
+            }
             return RedirectToAction(nameof(Index));
         }
 

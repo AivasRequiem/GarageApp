@@ -148,11 +148,13 @@ namespace GarageApp.Services
             return valResult;
         }
 
-        public async Task DeleteBookingSlot(Guid? bookingId, Guid userId)
+        public async Task<ValidationResult> DeleteBookingSlot(Guid? bookingId, Guid userId)
         {
             if (_context.BookingSlot == null)
             {
-                throw new Exception();
+                var idValResult = new ValidationResult();
+                idValResult.Errors = new List<ValidationFailure>() { new ValidationFailure("ID", "Slot doesn't exist") };
+                return idValResult;
             }
 
             BookingSlot slot = await _context.BookingSlot
@@ -162,7 +164,9 @@ namespace GarageApp.Services
 
             if (slot.GarageService!.Garage.OwnerId != userId && slot.UserId != userId)
             {
-                throw new Exception();
+                var userValidationResult = new ValidationResult();
+                userValidationResult.Errors = new List<ValidationFailure>() { new ValidationFailure("UserId", "You are not allowed to delete this slot") };
+                return userValidationResult;
             }
 
             if (slot != null)
@@ -171,6 +175,8 @@ namespace GarageApp.Services
             }
 
             await _context.SaveChangesAsync();
+
+            return new ValidationResult();
         }
     }
 
