@@ -7,6 +7,12 @@
     Guid userId = new Guid(User.FindFirstValue(ClaimTypes.NameIdentifier)!);
     
 }
+@if (TempData["Error"] != null)
+{
+    <div class="alert alert-danger" role="alert">
+        @TempData["Error"]
+    </div>
+}
 
 <table class="table">
     <thead>

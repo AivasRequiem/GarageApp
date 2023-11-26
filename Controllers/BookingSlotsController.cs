@@ -5,6 +5,8 @@ using GarageApp.Models;
 using System.Security.Claims;
 using Microsoft.AspNetCore.Authorization;
 using GarageApp.Services;
+using Microsoft.AspNetCore.SignalR.Protocol;
+using FluentValidation.Results;
 
 namespace GarageApp.Controllers
 {
@@ -54,17 +56,17 @@ namespace GarageApp.Controllers
             {
                 Guid userId = new Guid(User.FindFirstValue(ClaimTypes.NameIdentifier));
 
-                try
+                var valResult = await _bookingSlotsManagmentService.CreateBookingSlot(bookingSlot, userId, new Guid(id));
+                if (valResult.IsValid)
                 {
-                    await _bookingSlotsManagmentService.CreateBookingSlot(bookingSlot, userId, new Guid(id));
+                    return RedirectToAction(nameof(Index));
                 }
-                catch
+                else
                 {
                     ViewData["GarageServiceId"] = id;
+                    DisplayValidationErrors(valResult);
                     return View(bookingSlot);
-                }             
-
-                return RedirectToAction(nameof(Index));
+                }            
             }
 
             ViewData["GarageServiceId"] = id;
@@ -88,22 +90,25 @@ namespace GarageApp.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         [Authorize]
-        public async Task<IActionResult> Edit(Guid id, [Bind("Id,Date,Description")] BookingSlot bookingSlot)
+        public async Task<IActionResult> Edit(Guid id, [Bind("Date,Description")] BookingSlot bookingSlot)
         {
             Guid userId = new Guid(User.FindFirstValue(ClaimTypes.NameIdentifier));
 
             if (ModelState.IsValid)
             {
-                try
+                var valResult =  await _bookingSlotsManagmentService.EditBookingSlot(userId, bookingSlot);
+
+                if (!valResult.IsValid)
                 {
-                    await _bookingSlotsManagmentService.EditBookingSlot(id, userId, bookingSlot);
+                    ViewData["GarageServiceId"] = id;
+                    DisplayValidationErrors(valResult);
+                    return View(bookingSlot);
                 }
-                catch (Exception ex)
-                {
-                    return View(new ErrorViewModel { RequestId = ex.Message });
-                }
+                
                 return RedirectToAction(nameof(Index));
             }
+
+            ViewData["GarageServiceId"] = id;
             return View(bookingSlot);
         }
 
@@ -111,13 +116,11 @@ namespace GarageApp.Controllers
         public async Task<IActionResult> Confirm(Guid? id)
         {
             Guid userId = new Guid(User.FindFirstValue(ClaimTypes.NameIdentifier));
-            try
+
+            var valResult = await _bookingSlotsManagmentService.ConfirmBookingSlot(id, userId);
+            if (!valResult.IsValid)
             {
-                await _bookingSlotsManagmentService.ConfirmBookingSlot(id, userId);
-            }
-            catch 
-            {
-                return NotFound();
+                TempData["Error"] = valResult.Errors[0].ErrorMessage;
             }
             return RedirectToAction(nameof(Index));
         }
@@ -129,6 +132,14 @@ namespace GarageApp.Controllers
 
             await _bookingSlotsManagmentService.DeleteBookingSlot(id, userId);
             return RedirectToAction(nameof(Index));
+        }
+
+        private void DisplayValidationErrors(ValidationResult valResult)
+        {
+            foreach (var error in valResult.Errors)
+            {
+                ModelState.AddModelError(error.PropertyName, error.ErrorMessage);
+            }
         }
     }
 }
