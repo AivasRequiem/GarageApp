@@ -1,11 +1,9 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
 using GarageApp.Data;
 using GarageApp.Models;
 using System.Security.Claims;
 using Microsoft.AspNetCore.Authorization;
 using GarageApp.Services;
-using Microsoft.AspNetCore.SignalR.Protocol;
 using FluentValidation.Results;
 
 namespace GarageApp.Controllers
@@ -93,6 +91,7 @@ namespace GarageApp.Controllers
         public async Task<IActionResult> Edit(Guid id, [Bind("Date,Description")] BookingSlot bookingSlot)
         {
             Guid userId = new Guid(User.FindFirstValue(ClaimTypes.NameIdentifier));
+            bookingSlot.Id = id;
 
             if (ModelState.IsValid)
             {
@@ -100,7 +99,7 @@ namespace GarageApp.Controllers
 
                 if (!valResult.IsValid)
                 {
-                    ViewData["GarageServiceId"] = id;
+                    ViewData["GarageServiceId"] = id.ToString();
                     DisplayValidationErrors(valResult);
                     return View(bookingSlot);
                 }
@@ -108,8 +107,7 @@ namespace GarageApp.Controllers
                 return RedirectToAction(nameof(Index));
             }
 
-            ViewData["GarageServiceId"] = id;
-            return View(bookingSlot);
+            return RedirectToAction(nameof(Index));
         }
 
         // POST: BookingSlots/Confirm
