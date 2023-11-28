@@ -8,6 +8,8 @@ namespace GarageApp.Models
         public SelectList? Specializations { get; set; }
         public string? GarageSpecialization { get; set; }
         public string? SearchString { get; set; }
+        public bool isValid { get; set; }
+        public string? Exeption { get; set; }
     }
 }
 

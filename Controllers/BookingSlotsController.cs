@@ -1,46 +1,30 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Rendering;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Mvc;
 using GarageApp.Data;
 using GarageApp.Models;
 using System.Security.Claims;
 using Microsoft.AspNetCore.Authorization;
+using GarageApp.Services;
+using FluentValidation.Results;
 
 namespace GarageApp.Controllers
 {
     public class BookingSlotsController : Controller
     {
-        private readonly ApplicationDbContext _context;
+        private readonly BookingSlotsManagmentService _bookingSlotsManagmentService;
 
         public BookingSlotsController(ApplicationDbContext context)
         {
-            _context = context;
+            _bookingSlotsManagmentService = new BookingSlotsManagmentService(context);
         }
 
         // GET: BookingSlots
         public async Task<IActionResult> Index()
         {
-            string? userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
-            if (userId == null)
-            {
-                return NotFound();
-            }
+            Guid userId = new Guid(User.FindFirstValue(ClaimTypes.NameIdentifier));
 
-            Guid userGuid = new Guid(userId);
+            List<BookingSlot> mySlots = await _bookingSlotsManagmentService.GetBookingSlotsOfUser(userId);
 
-            var mySlots = _context.BookingSlot
-                .Include(slot => slot.GarageService)
-                .Include(slot => slot.GarageService.Garage)
-                .Where(slot => slot.UserId == userGuid ||
-                       slot.GarageService.Garage.OwnerId == userGuid)
-                .OrderBy(slot => slot.Date);
-
-
-            return View(await mySlots.ToListAsync());
+            return View(mySlots);
         }
 
         // GET: BookingSlots/Create
@@ -50,13 +34,12 @@ namespace GarageApp.Controllers
             {
                 return NotFound();
             }
+
             ViewData["GarageServiceId"] = id;
             return View();
         }
 
         // POST: BookingSlots/Create
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
         [Authorize]
@@ -69,95 +52,96 @@ namespace GarageApp.Controllers
 
             if (ModelState.IsValid)
             {
-				string? userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
-                if (userId == null)
-                {
-                    return NotFound();
-                }
-                Guid serviceId = new Guid(id);
-                var newSlot = new BookingSlot()
-                {
-                    UserId = new Guid(userId),
-                    IsConfirmed = false,
-                    Description = bookingSlot.Description,
-                    Date = bookingSlot.Date,
-                    GarageServiceId = serviceId,
-                    Id = Guid.NewGuid()
-                };
+                Guid userId = new Guid(User.FindFirstValue(ClaimTypes.NameIdentifier));
 
-                _context.Add(newSlot);
-                await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
+                ValidationResult valResult = await _bookingSlotsManagmentService.CreateBookingSlot(bookingSlot, userId, new Guid(id));
+                if (valResult.IsValid)
+                {
+                    return RedirectToAction(nameof(Index));
+                }
+                else
+                {
+                    ViewData["GarageServiceId"] = id;
+                    DisplayValidationErrors(valResult);
+                    return View(bookingSlot);
+                }            
             }
 
+            ViewData["GarageServiceId"] = id;
             return View(bookingSlot);
         }
 
+        // GET: BookingSlots/Edit
+        public async Task<IActionResult> Edit(string? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            BookingSlot bookingSlot = await _bookingSlotsManagmentService.GetBookingSlotById(new Guid(id));
+            ViewData["GarageServiceId"] = id;
+            return View(bookingSlot);
+        }
+
+        // POST: BookingSlots/Edit
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        [Authorize]
+        public async Task<IActionResult> Edit(Guid id, [Bind("Date,Description")] BookingSlot bookingSlot)
+        {
+            Guid userId = new Guid(User.FindFirstValue(ClaimTypes.NameIdentifier));
+            bookingSlot.Id = id;
+
+            if (ModelState.IsValid)
+            {
+                ValidationResult valResult =  await _bookingSlotsManagmentService.EditBookingSlot(userId, bookingSlot);
+
+                if (!valResult.IsValid)
+                {
+                    ViewData["GarageServiceId"] = id.ToString();
+                    DisplayValidationErrors(valResult);
+                    return View(bookingSlot);
+                }
+                
+                return RedirectToAction(nameof(Index));
+            }
+
+            return RedirectToAction(nameof(Index));
+        }
+
+        // POST: BookingSlots/Confirm
         public async Task<IActionResult> Confirm(Guid? id)
         {
-            if (id == null || _context.BookingSlot == null)
-            {
-                return NotFound();
-            }
+            Guid userId = new Guid(User.FindFirstValue(ClaimTypes.NameIdentifier));
 
-            string? userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
-            if (userId == null)
+            ValidationResult valResult = await _bookingSlotsManagmentService.ConfirmBookingSlot(id, userId);
+            if (!valResult.IsValid)
             {
-                return NotFound();
+                TempData["Error"] = valResult.Errors[0].ErrorMessage;
             }
-
-            Guid userGuid = new Guid(userId);
-
-            var slot = await _context.BookingSlot
-                .Include(s => s.GarageService)
-                .Include(s => s.GarageService!.Garage)
-                .FirstAsync(s => s.Id == id);
-           
-            if (slot.GarageService!.Garage.OwnerId != userGuid)
-            {
-                return NotFound();
-            }
-            slot.IsConfirmed = true;
-            _context.Update(slot);
-            await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
+
+        // POST: BookingSlots/Delete
         public async Task<IActionResult> Delete(Guid? id)
         {
-            if (_context.BookingSlot == null)
-            {
-                return Problem("Entity set 'ApplicationDbContext.BookingSlot'  is null.");
-            }
-            string? userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
-            if (userId == null)
-            {
-                return NotFound();
-            }
+            Guid userId = new Guid(User.FindFirstValue(ClaimTypes.NameIdentifier));
 
-            Guid userGuid = new Guid(userId);
-
-            var slot = await _context.BookingSlot
-                .Include(s => s.GarageService)
-                .Include(s => s.GarageService!.Garage)
-                .FirstAsync(s => s.Id == id);
-
-            if (slot.GarageService!.Garage.OwnerId != userGuid && slot.UserId != userGuid)
+            ValidationResult valResult = await _bookingSlotsManagmentService.DeleteBookingSlot(id, userId);
+            if (!valResult.IsValid)
             {
-                return NotFound();
+                TempData["Error"] = valResult.Errors[0].ErrorMessage;
             }
-
-            if (slot != null)
-            {
-                _context.BookingSlot.Remove(slot);
-            }
-            
-            await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
-        private bool BookingSlotExists(Guid id)
+        private void DisplayValidationErrors(ValidationResult valResult)
         {
-          return (_context.BookingSlot?.Any(e => e.GarageServiceId == id)).GetValueOrDefault();
+            foreach (var error in valResult.Errors)
+            {
+                ModelState.AddModelError(error.PropertyName, error.ErrorMessage);
+            }
         }
     }
 }
