@@ -10,12 +10,10 @@ namespace GarageApp.Controllers
     [Authorize(Roles = "Admin")]
     public class SpecializationsController : Controller
     {
-        private readonly ApplicationDbContext _context;
         private readonly SpecializationManagmentService _specializationManagmentService;
 
         public SpecializationsController(ApplicationDbContext context)
         {
-            _context = context;
             _specializationManagmentService = new SpecializationManagmentService(context);
         }
 
@@ -23,7 +21,7 @@ namespace GarageApp.Controllers
         public async Task<IActionResult> Index()
         {
               return _specializationManagmentService.CheckContext() ? 
-                          View(await _context.Specialization.ToListAsync()) :
+                          View(await _specializationManagmentService.GetAllSpecializations()) :
                           Problem("Entity set 'ApplicationDbContext.Specialization'  is null.");
         }
 

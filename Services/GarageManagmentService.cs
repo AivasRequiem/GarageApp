@@ -80,13 +80,8 @@ namespace GarageApp.Services
             {
                 return false;
             }
-
-            Garage garage = await this.GetGarage(id);
-
-            if (garage != null)
-            {
-                _context.Garages.Remove(garage);
-            }
+            
+            _context.Garages.Remove(await GetGarage(id));
 
             await _context.SaveChangesAsync();
 
@@ -102,7 +97,7 @@ namespace GarageApp.Services
                     Guid specializationId;
                     if (Guid.TryParse(specialization, out specializationId))
                     {
-                        var spec = _context.Specialization.First(elem => elem.Id == specializationId);
+                        Specialization spec = _context.Specialization.First(elem => elem.Id == specializationId);
                         garage.GarageSpecializations.Add(new GarageSpecializations()
                         {
                             Garage = garage,
