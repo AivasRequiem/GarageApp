@@ -47,24 +47,31 @@ namespace GarageApp.Services
             await _context.SaveChangesAsync();
         }
 
-        public async Task DeleteService(Guid id)
+        public async Task<bool> DeleteService(Guid id)
         {
             if (IsAnyGarageServices())
             {
-                throw new Exception("Entity set 'ApplicationDbContext.GarageService'  is null.");
+                return false;
             }
-            var garageService = await GetGarageService(id);
+
+            GarageService garageService = await GetGarageService(id);
+
             if (garageService != null)
             {
                 _context.GarageService.Remove(garageService);
             }
 
             await _context.SaveChangesAsync();
+            return true;
         }
 
         public async Task EditService(GarageService garageService)
         {
-            _context.Update(garageService);
+            GarageService existingService = await GetGarageService(garageService.Id);
+            existingService.Price = garageService.Price;
+            existingService.Description = garageService.Description;
+            existingService.Name = garageService.Name;
+            _context.Update(existingService);
             await _context.SaveChangesAsync();
         }
 

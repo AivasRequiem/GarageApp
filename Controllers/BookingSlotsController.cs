@@ -54,7 +54,7 @@ namespace GarageApp.Controllers
             {
                 Guid userId = new Guid(User.FindFirstValue(ClaimTypes.NameIdentifier));
 
-                var valResult = await _bookingSlotsManagmentService.CreateBookingSlot(bookingSlot, userId, new Guid(id));
+                ValidationResult valResult = await _bookingSlotsManagmentService.CreateBookingSlot(bookingSlot, userId, new Guid(id));
                 if (valResult.IsValid)
                 {
                     return RedirectToAction(nameof(Index));
@@ -95,7 +95,7 @@ namespace GarageApp.Controllers
 
             if (ModelState.IsValid)
             {
-                var valResult =  await _bookingSlotsManagmentService.EditBookingSlot(userId, bookingSlot);
+                ValidationResult valResult =  await _bookingSlotsManagmentService.EditBookingSlot(userId, bookingSlot);
 
                 if (!valResult.IsValid)
                 {
@@ -115,7 +115,7 @@ namespace GarageApp.Controllers
         {
             Guid userId = new Guid(User.FindFirstValue(ClaimTypes.NameIdentifier));
 
-            var valResult = await _bookingSlotsManagmentService.ConfirmBookingSlot(id, userId);
+            ValidationResult valResult = await _bookingSlotsManagmentService.ConfirmBookingSlot(id, userId);
             if (!valResult.IsValid)
             {
                 TempData["Error"] = valResult.Errors[0].ErrorMessage;
@@ -128,7 +128,7 @@ namespace GarageApp.Controllers
         {
             Guid userId = new Guid(User.FindFirstValue(ClaimTypes.NameIdentifier));
 
-            var valResult = await _bookingSlotsManagmentService.DeleteBookingSlot(id, userId);
+            ValidationResult valResult = await _bookingSlotsManagmentService.DeleteBookingSlot(id, userId);
             if (!valResult.IsValid)
             {
                 TempData["Error"] = valResult.Errors[0].ErrorMessage;

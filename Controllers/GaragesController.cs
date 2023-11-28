@@ -23,13 +23,14 @@ namespace GarageApp.Controllers
         // GET: Garages
         public async Task<IActionResult> Index(string garageSpecialization, string searchString)
         {
-            try
+            GarageSpecializationsViewModel garages = await _garageManagmentService.GetGaragesBySpecialization(garageSpecialization, searchString);
+            if (garages.isValid)
             {
                 return View(await _garageManagmentService.GetGaragesBySpecialization(garageSpecialization, searchString));
             }
-            catch(Exception ex)
+            else
             {
-                return View(new ErrorViewModel { RequestId = ex.Message });
+                return View(new ErrorViewModel { RequestId = garages.Exeption });
             }
         }
 
@@ -69,8 +70,6 @@ namespace GarageApp.Controllers
         }
 
         // POST: Garages/Create
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
         [Authorize(Roles = "Admin,garageOwner")]
@@ -116,8 +115,6 @@ namespace GarageApp.Controllers
         }
 
         // POST: Garages/Edit/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
         [Authorize(Roles = "Admin,garageOwner")]
@@ -163,15 +160,14 @@ namespace GarageApp.Controllers
         [Authorize(Roles = "Admin,garageOwner")]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            try
+            if(await _garageManagmentService.DeleteGarage(id))
             {
-                _garageManagmentService.DeleteGarage(id);
+                return RedirectToAction(nameof(Index));
             }
-            catch(Exception ex)
+            else
             {
-                return View(new ErrorViewModel { RequestId = ex.Message });
-            }
-            return RedirectToAction(nameof(Index));
+                return View(new ErrorViewModel { RequestId = "Entity set 'ApplicationDbContext.Garages'  is null." });
+            }            
         }
     }
 }

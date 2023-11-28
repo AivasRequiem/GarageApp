@@ -18,14 +18,15 @@ namespace GarageApp.Services
         public async Task<GarageSpecializationsViewModel> GetGaragesBySpecialization(string garageSpecialization, string searchString)
         {
 
-            if (_context.Garages == null)
+            if (_context.Garages == null || _context.Specialization == null)
             {
-                throw new Exception("Entity set 'MvcMovieContext.Garages'  is null.");
-            }
+                GarageSpecializationsViewModel eror = new GarageSpecializationsViewModel
+                {
+                    isValid = false,
+                    Exeption = "Entity set 'MvcMovieContext.Garages'  is null."
+                };
 
-            if (_context.Specialization == null)
-            {
-                throw new Exception("Entity set 'MvcMovieContext.Garages'  is null.");
+                return eror;
             }
 
             IQueryable<string> specializations = from spec in _context.Specialization
@@ -44,10 +45,11 @@ namespace GarageApp.Services
                 garages = garages.Where(g => g.GarageSpecializations != null && g.GarageSpecializations.Any(spec => spec.Specialization.Name == garageSpecialization));
             }
 
-            var garageSpecializationsView = new GarageSpecializationsViewModel
+            GarageSpecializationsViewModel garageSpecializationsView = new GarageSpecializationsViewModel
             {
                 Specializations = new SelectList(await specializations.Distinct().ToListAsync()),
-                Garages = await garages.ToListAsync()
+                Garages = await garages.ToListAsync(),
+                isValid = true
             };
 
             return garageSpecializationsView;
@@ -71,20 +73,24 @@ namespace GarageApp.Services
             return _context.Garages.Any(g => g.Name == garage.Name);
         }
 
-        public async void DeleteGarage(int id)
+        public async Task<bool> DeleteGarage(int id)
         {
 
             if (_context.Garages == null)
             {
-                throw new Exception($"Entity set 'ApplicationDbContext.Garages'  is null.");
+                return false;
             }
-            Garage garage = await this.GetGarage(id); ;
+
+            Garage garage = await this.GetGarage(id);
+
             if (garage != null)
             {
                 _context.Garages.Remove(garage);
             }
 
             await _context.SaveChangesAsync();
+
+            return true;
         }
 
         private void addSpecializationToGarage(Garage garage, string[] GarageSpecializations)

@@ -5,6 +5,7 @@ using GarageApp.Models;
 using System.ComponentModel.DataAnnotations;
 using Microsoft.AspNetCore.Authorization;
 using GarageApp.Services;
+using Microsoft.IdentityModel.Tokens;
 
 namespace GarageApp.Controllers
 {
@@ -48,17 +49,14 @@ namespace GarageApp.Controllers
         [Authorize(Roles = "Admin,garageOwner")]
         public async Task<IActionResult> Create(int id)
         {
-            ViewData["GarageId"] = id;
+            List<Specialization> specializations = await _specializationManagment.GetSpecializationOfGarage(id);
+            if (specializations.IsNullOrEmpty())
+            {
+                return View(new ErrorViewModel { RequestId = "No specializations in Gatage!" });
+            }
 
-            try
-            {
-                List<Specialization> specializations = await _specializationManagment.GetSpecializationOfGarage(id);
-                ViewBag.Specializations = new SelectList(specializations, "Id", "Name");
-            }
-            catch (Exception ex)
-            {
-                return View(new ErrorViewModel { RequestId = ex.Message });
-            }
+            ViewBag.Specializations = new SelectList(specializations, "Id", "Name");
+            ViewData["GarageId"] = id;
 
             return View();
         }
@@ -73,8 +71,6 @@ namespace GarageApp.Controllers
         }
 
         // POST: GarageServices/Create/id
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
         [Authorize(Roles = "Admin,garageOwner")]
@@ -107,8 +103,6 @@ namespace GarageApp.Controllers
         }
 
         // POST: GarageServices/Edit/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
         [Authorize(Roles = "Admin,garageOwner")]
@@ -119,21 +113,8 @@ namespace GarageApp.Controllers
                 return View(new ErrorViewModel { RequestId = $"Garage service with ID {id} doesn't match." });
             }
 
-            GarageService existingService = await _garageServicesManagment.GetGarageService(id);
-
-            if (ModelState.IsValid)
-            {
-                try
-                {
-                    await _garageServicesManagment.EditService(garageService);
-                }
-                catch (Exception ex)
-                {
-                    return View(new ErrorViewModel { RequestId = ex.Message });
-                }
-                return RedirectToAction(nameof(Index));
-            }
-            return View(garageService);
+            await _garageServicesManagment.EditService(garageService);
+            return RedirectToAction(nameof(Index));
         }
 
         // GET: GarageServices/Delete/5
@@ -145,7 +126,7 @@ namespace GarageApp.Controllers
                 return NotFound();
             }
 
-            var garageService = await _garageServicesManagment.GetGarageService(id);
+            GarageService garageService = await _garageServicesManagment.GetGarageService(id);
             if (garageService == null)
             {
                 return NotFound();
@@ -160,13 +141,10 @@ namespace GarageApp.Controllers
         [Authorize(Roles = "Admin,garageOwner")]
         public async Task<IActionResult> DeleteConfirmed(Guid id)
         {
-            try
+            if(!await _garageServicesManagment.DeleteService(id))
             {
-                await _garageServicesManagment.DeleteService(id);
-            }
-            catch (Exception ex)
-            {
-                return View(new ErrorViewModel { RequestId = ex.Message });
+                return View(new ErrorViewModel
+                    { RequestId = "Entity set 'ApplicationDbContext.GarageService'  is null." });
             }
             return RedirectToAction(nameof(Index));
         }
